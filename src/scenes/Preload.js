@@ -9,8 +9,6 @@ class Preload extends Phaser.Scene {
     preload() {
         this.load.tilemapTiledJSON("map", "assets/forest_map.json");
         this.load.image("tiles-1", "assets/forest_tiles.png");
-        this.load.image("tiles-2", "assets/forest_objects.png");
-        this.load.image("forest", "assets/forest.png");
     }
 
     create() {

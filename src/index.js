@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import PlayScene from "./scenes/Play";
 import PreloadScene from "./scenes/Preload"
 
-const WIDTH = 1920;
+const WIDTH = 25600;
 const HEIGHT = 1080;
 
 const SHARED_CONFIG = {
@@ -16,6 +16,7 @@ const initScenes = () => Scenes.map(createScene)
 
 const config = {
   type: Phaser.AUTO,
+  backgroundColor: "#E8F9FD",
   ...SHARED_CONFIG,
   pixelArt: true,
   physics: {
