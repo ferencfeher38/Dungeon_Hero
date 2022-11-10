@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser, { Display } from "phaser";
 import Player from "../entities/Player";
 
 class Play extends Phaser.Scene {
@@ -55,9 +55,9 @@ class Play extends Phaser.Scene {
     }
 
     setupFollowupCameraOn(player) {
-        const { height, width, mapOffset, zoomFactor } = this.config;
-        this.physics.world.setBounds(0, 0, width + mapOffset, height);
-        this.cameras.main.setBounds(0, 0, width + mapOffset, height).setZoom(zoomFactor);
+        const { height, width, mapOffsetWidth, mapOffsetHeight, zoomFactor } = this.config;
+        this.physics.world.setBounds(0, 0, width + mapOffsetWidth, height + mapOffsetHeight);
+        this.cameras.main.setBounds(0, 0, width + mapOffsetWidth, height + mapOffsetHeight).setZoom(zoomFactor);
         this.cameras.main.startFollow(player);
     }
 }
