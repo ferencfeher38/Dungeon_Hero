@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import InitializeAnimations from "../entities/PlayerAnimations";
+import Collidable from "../mixins/Collidable";
 
 class Player extends Phaser.Physics.Arcade.Sprite {
 
@@ -8,7 +9,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
-
+        
+        Object.assign(this, Collidable);
+        
         this.initialize();
         this.initializeEvents();
     }

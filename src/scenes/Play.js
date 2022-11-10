@@ -3,15 +3,23 @@ import Player from "../entities/Player";
 
 class Play extends Phaser.Scene {
 
-    constructor() {
+    constructor(config) {
         super("PlayScene");
+        this.config = config;
     }
 
     create() {
         const map = this.createMap();
         const layers = this.createLayers(map);
         const player = this.createPlayer();
-        this.physics.add.collider(player, layers.platformsColliders);
+        
+        this.createPlayerColliders(player, {
+            colliders: {
+                platformsColliders: layers.platformsColliders
+            }
+        });
+
+        this.setupFollowupCameraOn(player);
     }
 
     createMap() {
@@ -19,6 +27,7 @@ class Play extends Phaser.Scene {
         map.addTilesetImage("forest_tiles", "tiles-1");
         map.addTilesetImage("forest_objects", "tiles-2");
         map.addTilesetImage("collider", "tiles-3");
+        map.addTilesetImage("test", "tiles-4");
         return map;
     }
 
@@ -26,7 +35,8 @@ class Play extends Phaser.Scene {
         const tileset1 = map.getTileset("forest_tiles");
         const tileset2 = map.getTileset("forest_objects");
         const tileset3 = map.getTileset("collider");
-        const platforms = map.createStaticLayer("platforms", tileset1);
+        const tileset4 = map.getTileset("test");
+        const platforms = map.createStaticLayer("platforms", [tileset1, tileset4]);
         const environment = map.createStaticLayer("environment", tileset2);
         const platformsColliders = map.createStaticLayer("platforms_colliders", tileset3);
         platformsColliders.setVisible(false);
@@ -37,6 +47,18 @@ class Play extends Phaser.Scene {
 
     createPlayer() {
         return new Player(this, 100, 250);
+    }
+
+    createPlayerColliders(player, {colliders}) {
+        player
+            .addCollider(colliders.platformsColliders);
+    }
+
+    setupFollowupCameraOn(player) {
+        const { height, width, mapOffset, zoomFactor } = this.config;
+        this.physics.world.setBounds(0, 0, width + mapOffset, height);
+        this.cameras.main.setBounds(0, 0, width + mapOffset, height).setZoom(zoomFactor);
+        this.cameras.main.startFollow(player);
     }
 }
 
