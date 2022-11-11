@@ -1,4 +1,4 @@
-import Phaser, { Display } from "phaser";
+import Phaser from "phaser";
 import Player from "../entities/Player";
 
 class Play extends Phaser.Scene {
@@ -27,7 +27,6 @@ class Play extends Phaser.Scene {
         map.addTilesetImage("forest_tiles", "tiles-1");
         map.addTilesetImage("forest_objects", "tiles-2");
         map.addTilesetImage("collider", "tiles-3");
-        map.addTilesetImage("test", "tiles-4");
         return map;
     }
 
@@ -35,8 +34,7 @@ class Play extends Phaser.Scene {
         const tileset1 = map.getTileset("forest_tiles");
         const tileset2 = map.getTileset("forest_objects");
         const tileset3 = map.getTileset("collider");
-        const tileset4 = map.getTileset("test");
-        const platforms = map.createStaticLayer("platforms", [tileset1, tileset4]);
+        const platforms = map.createStaticLayer("platforms", tileset1);
         const environment = map.createStaticLayer("environment", tileset2);
         const platformsColliders = map.createStaticLayer("platforms_colliders", tileset3);
         platformsColliders.setVisible(false);
