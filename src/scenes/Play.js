@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser, { Display } from "phaser";
 import Player from "../entities/Player";
 
 class Play extends Phaser.Scene {
@@ -47,11 +47,12 @@ class Play extends Phaser.Scene {
     }
 
     createBackground(map) {
+        const { height, width } = this.config;
         const backgroundObject = map.getObjectLayer("background").objects[0];
-        this.add.tileSprite(backgroundObject.x, backgroundObject.y, this.config.width, 1080, "forest-background")
+        this.add.tileSprite(backgroundObject.x, backgroundObject.y, width, height, "forest-background")
             .setDepth(-10)
-            .setOrigin(0,1)
-            .setScrollFactor(0,1);
+            .setOrigin(0, 1)
+            .setScrollFactor(0, 1);
     }
 
     createPlayer(start) {
@@ -64,10 +65,12 @@ class Play extends Phaser.Scene {
     }
 
     setupFollowupCameraOn(player) {
-        const { height, width, mapOffsetWidth, mapOffsetHeight, zoomFactor } = this.config;
-        this.physics.world.setBounds(0, 0, width + mapOffsetWidth, height + mapOffsetHeight);
-        this.cameras.main.setBounds(0, 0, width + mapOffsetWidth, height + mapOffsetHeight).setZoom(zoomFactor);
-        this.cameras.main.startFollow(player);
+        const { height, width, mapOffsetWidth, zoomFactor} = this.config;
+        this.physics.world.setBounds(0, 0, width + mapOffsetWidth, height);
+        this.cameras.main
+            .setZoom(zoomFactor)
+            .startFollow(player)
+            .setBounds(0, 0, width, height);
     }
 
     getPlayerZones(playerZonesLayer) {
@@ -88,6 +91,10 @@ class Play extends Phaser.Scene {
             endOfLevelOverlap.active = false;
             console.log("Player has won!");
         });
+    }
+
+    update(player) {
+        console.log("x: " + this.cameras.main.scrollX + "y: " + this.cameras.main.scrollY);
     }
 }
 
