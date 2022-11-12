@@ -6,7 +6,19 @@
          "draworder":"topdown",
          "id":5,
          "name":"background",
-         "objects":[],
+         "objects":[
+                {
+                 "class":"",
+                 "gid":108,
+                 "height":1080,
+                 "id":11,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":1920,
+                 "x":0,
+                 "y":1080
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -137,7 +149,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":6,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -211,15 +223,15 @@
          "name":"forest_background",
          "spacing":0,
          "tilecount":1,
-         "tileheight":540,
+         "tileheight":1080,
          "tiles":[
                 {
                  "id":0,
-                 "image":"..\/..\/craftpix-678945-fantasy-platformer-game-kit-pixel-art\/pixel-art-forest-platformer-tileset\/Background\/Pale\/forest_background.jpg",
-                 "imageheight":540,
-                 "imagewidth":960
+                 "image":"forest_background.jpg",
+                 "imageheight":1080,
+                 "imagewidth":1920
                 }],
-         "tilewidth":960
+         "tilewidth":1920
         }],
  "tilewidth":64,
  "type":"map",

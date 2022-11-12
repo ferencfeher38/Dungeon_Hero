@@ -13,6 +13,7 @@ class Play extends Phaser.Scene {
         const layers = this.createLayers(map);
         const playerZones = this.getPlayerZones(layers.playerZones);
         const player = this.createPlayer(playerZones.start);
+        this.createBackground(map);
         this.createPlayerColliders(player, {
             colliders: {
                 platformsColliders: layers.platformsColliders
@@ -43,6 +44,14 @@ class Play extends Phaser.Scene {
         platformsColliders.setCollisionByProperty({collides: true});
 
         return {environment, platforms, platformsColliders, playerZones};
+    }
+
+    createBackground(map) {
+        const backgroundObject = map.getObjectLayer("background").objects[0];
+        this.add.tileSprite(backgroundObject.x, backgroundObject.y, this.config.width, 1080, "forest-background")
+            .setDepth(-10)
+            .setOrigin(0,1)
+            .setScrollFactor(0,1);
     }
 
     createPlayer(start) {
