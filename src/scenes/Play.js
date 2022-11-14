@@ -1,5 +1,6 @@
 import Phaser, { Display } from "phaser";
 import Player from "../entities/Player";
+import Goblin from "../entities/Goblin";
 
 class Play extends Phaser.Scene {
 
@@ -10,13 +11,22 @@ class Play extends Phaser.Scene {
 
     create() {
         const map = this.createMap();
+        this.createBackground(map);
         const layers = this.createLayers(map);
         const playerZones = this.getPlayerZones(layers.playerZones);
+
         const player = this.createPlayer(playerZones.start);
-        this.createBackground(map);
         this.createPlayerColliders(player, {
             colliders: {
                 platformsColliders: layers.platformsColliders
+            }
+        });
+
+        const enemies= this.createEnemies(layers.enemySpawnpoints);
+        this.createEnemyColliders(enemies, {
+            colliders: {
+                platformsColliders: layers.platformsColliders,
+                player
             }
         });
 
@@ -40,10 +50,11 @@ class Play extends Phaser.Scene {
         const environment = map.createStaticLayer("environment", tileset2);
         const platformsColliders = map.createStaticLayer("platforms_colliders", tileset3);
         const playerZones = map.getObjectLayer("player_zones");
+        const enemySpawnpoints = map.getObjectLayer("enemy_spawnpoints");
         platformsColliders.setVisible(false);
         platformsColliders.setCollisionByProperty({collides: true});
 
-        return {environment, platforms, platformsColliders, playerZones};
+        return {environment, platforms, platformsColliders, playerZones, enemySpawnpoints};
     }
 
     createBackground(map) {
@@ -64,13 +75,27 @@ class Play extends Phaser.Scene {
             .addCollider(colliders.platformsColliders);
     }
 
+    createEnemies(spawnLayer) {
+        return spawnLayer.objects.map(spawnPoint => {
+            return new Goblin(this, spawnPoint.x, spawnPoint.y);
+        })
+    }
+
+    createEnemyColliders(enemies, {colliders}) {
+        enemies.forEach(enemy  =>{
+            enemy
+            .addCollider(colliders.platformsColliders)
+            .addCollider(colliders.player);
+        });
+    }
+
     setupFollowupCameraOn(player) {
         const { height, width, mapOffsetWidth, zoomFactor} = this.config;
         this.physics.world.setBounds(0, 0, width + mapOffsetWidth, height);
         this.cameras.main
             .setZoom(zoomFactor)
             .startFollow(player)
-            .setBounds(0, 0, width, height);
+            .setBounds(0, 0, width + mapOffsetWidth, height);
     }
 
     getPlayerZones(playerZonesLayer) {
@@ -91,10 +116,6 @@ class Play extends Phaser.Scene {
             endOfLevelOverlap.active = false;
             console.log("Player has won!");
         });
-    }
-
-    update(player) {
-        console.log("x: " + this.cameras.main.scrollX + "y: " + this.cameras.main.scrollY);
     }
 }
 

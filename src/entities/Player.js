@@ -5,7 +5,9 @@ import Collidable from "../mixins/Collidable";
 class Player extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene, x, y) {
-        super(scene, x, y, "knight");
+        super(scene, x, y, "knight_idle_animation",
+                           "knight_run_animation",
+                           "knight_jump_animation");
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -24,8 +26,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.keyboards = this.scene.input.keyboard.createCursorKeys();
         this.body.setGravityY(this.gravity);
         this.setCollideWorldBounds(true);
-        this.body.setOffset(0, -19);
         this.setOrigin(0.5, 1);
+        this.setBodySize(40, 55);
+        this.setOffset(26, 55);
         InitializeAnimations(this.scene.anims);
     }
 

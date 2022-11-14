@@ -12,10 +12,27 @@ class Preload extends Phaser.Scene {
         this.load.image("tiles-2", "assets/forest_objects.png");
         this.load.image("tiles-3", "assets/collider.png");
         this.load.image("forest-background", "assets/forest_background.jpg");
-        this.load.spritesheet("knight", "assets/knight_move.png", {
-            frameWidth: 90,
-            frameHeight: 128,
-            spacing: 38
+        this.load.spritesheet("knight_idle_animation", "assets/knight_idle_animation.png", {
+            frameWidth: 93,
+            frameHeight: 110,
+            spacing: 35
+        })
+
+        this.load.spritesheet("knight_run_animation", "assets/knight_run_animation.png", {
+            frameWidth: 93,
+            frameHeight: 110,
+            spacing: 35
+        })
+
+        this.load.spritesheet("knight_jump_animation", "assets/knight_jump_animation.png", {
+            frameWidth: 93,
+            frameHeight: 110,
+            spacing: 35
+        })
+
+        this.load.spritesheet("goblin_animations", "assets/goblin_animations.png", {
+            frameWidth: 110,
+            frameHeight: 110
         })
     }
 
