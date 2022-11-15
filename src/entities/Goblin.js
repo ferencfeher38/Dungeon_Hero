@@ -1,15 +1,16 @@
 import Enemy from "./Enemy";
+import InitializeAnimations from "../animations/GoblinAnimations";
 
 class Goblin extends Enemy {
     constructor(scene, x, y) {
         super(scene, x, y, "goblin_animations");
-    
-        this.init();
+
+        InitializeAnimations(scene.anims);
     }
 
-    init() {
-        this.setBodySize(50, 55);
-        this.setOffset(35, 35);
+    update(time, delta) {
+        super.update(time,delta);
+        this.play("goblin-walk", true);
     }
 }
 

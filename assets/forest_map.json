@@ -119,7 +119,7 @@
          "name":"enemy_spawnpoints",
          "objects":[
                 {
-                 "class":"",
+                 "class":"Goblin",
                  "height":0,
                  "id":13,
                  "name":"Spawn",
@@ -131,13 +131,14 @@
                          "value":"Goblin"
                         }],
                  "rotation":0,
+                 "type":"Goblin",
                  "visible":true,
                  "width":0,
                  "x":809,
                  "y":693
                 }, 
                 {
-                 "class":"",
+                 "class":"Goblin",
                  "height":0,
                  "id":14,
                  "name":"Spawn",
@@ -149,6 +150,7 @@
                          "value":"Goblin"
                         }],
                  "rotation":0,
+                 "type":"Goblin",
                  "visible":true,
                  "width":0,
                  "x":1733,

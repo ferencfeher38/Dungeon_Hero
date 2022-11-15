@@ -1,6 +1,6 @@
-import Phaser, { Display } from "phaser";
+import Phaser from "phaser";
 import Player from "../entities/Player";
-import Goblin from "../entities/Goblin";
+import Enemies from "../groups/Enemies";
 
 class Play extends Phaser.Scene {
 
@@ -22,7 +22,7 @@ class Play extends Phaser.Scene {
             }
         });
 
-        const enemies= this.createEnemies(layers.enemySpawnpoints);
+        const enemies= this.createEnemies(layers.enemySpawnpoints, layers.platformsColliders);
         this.createEnemyColliders(enemies, {
             colliders: {
                 platformsColliders: layers.platformsColliders,
@@ -32,6 +32,28 @@ class Play extends Phaser.Scene {
 
         this.setupFollowupCameraOn(player);
         this.createEndOfLevel(playerZones.end, player);
+    }
+
+    finishDrawing(pointer, layer) {
+        this.line.x2 = pointer.worldX;
+        this.line.y2 = pointer.worldY;
+
+        this.graphics.clear();
+        this.graphics.strokeLineShape(this.line);
+
+        this.tileHits = layer.getTilesWithinShape(this.line);
+
+        if(this.tileHits.length > 0) {
+            this.tileHits.forEach(tile => {
+                if(tile.index !== -1) {
+                    tile.setCollision(true);
+                }
+            });
+        }
+
+        this.drawDebug(layer);
+
+        this.plotting = false;
     }
 
     createMap() {
@@ -75,18 +97,23 @@ class Play extends Phaser.Scene {
             .addCollider(colliders.platformsColliders);
     }
 
-    createEnemies(spawnLayer) {
-        return spawnLayer.objects.map(spawnPoint => {
-            return new Goblin(this, spawnPoint.x, spawnPoint.y);
-        })
+    createEnemies(spawnLayer, platformsColliders) {
+        const enemies = new Enemies(this);
+        const enemyTypes = enemies.getTypes();
+
+        spawnLayer.objects.forEach(spawnPoint => {
+            const enemy = new enemyTypes[spawnPoint.type](this, spawnPoint.x, spawnPoint.y);
+            enemy.setPlatformColliders(platformsColliders);
+            enemies.add(enemy);
+        });
+
+        return enemies; 
     }
 
     createEnemyColliders(enemies, {colliders}) {
-        enemies.forEach(enemy  =>{
-            enemy
+        enemies
             .addCollider(colliders.platformsColliders)
             .addCollider(colliders.player);
-        });
     }
 
     setupFollowupCameraOn(player) {

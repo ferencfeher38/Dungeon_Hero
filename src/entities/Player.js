@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import InitializeAnimations from "../entities/PlayerAnimations";
+import InitializeAnimations from "../animations/PlayerAnimations";
 import Collidable from "../mixins/Collidable";
 
 class Player extends Phaser.Physics.Arcade.Sprite {

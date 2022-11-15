@@ -31,8 +31,8 @@ class Preload extends Phaser.Scene {
         })
 
         this.load.spritesheet("goblin_animations", "assets/goblin_animations.png", {
-            frameWidth: 110,
-            frameHeight: 110
+            frameWidth: 128,
+            frameHeight: 128
         })
     }
 
