@@ -10,6 +10,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         
         Object.assign(this, Collidable);
+
+        this.config = scene.config;
         
         this.initialize();
         this.initializeEvents();
@@ -19,7 +21,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.gravity = 700;
         this.enemyVelocity = 50;
         this.timeFromLastTurn = 0;
-        this.maxPatrolDistance = 200;
+        this.maxPatrolDistance = 400;
         this.currentPatrolDistance = 0;
         this.platformsCollidersLayer = null;
         this.rayGraphics = this.scene.add.graphics({lineStyle: {
@@ -50,7 +52,11 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
         this.currentPatrolDistance += Math.abs(this.body.deltaX());
 
-        const { ray, hasHit } = this.raycast(this.body, this.platformsCollidersLayer, 30, 1);
+        const { ray, hasHit } = this.raycast(this.body, this.platformsCollidersLayer, {
+            raylength: 30,
+            precision: 1,
+            steepness: 0.5
+        });
 
         if((!hasHit || this.currentPatrolDistance >= this.maxPatrolDistance) && this.timeFromLastTurn + 100 < time) {
             this.setFlipX(!this.flipX);
@@ -59,8 +65,10 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
             this.currentPatrolDistance = 0;
         }
 
-        this.rayGraphics.clear();
-        this.rayGraphics.strokeLineShape(ray);
+        if(this.config.debug && ray) {
+            this.rayGraphics.clear();
+            this.rayGraphics.strokeLineShape(ray);
+        }
     }
 
     setPlatformColliders(platformsCollidersLayer) {
