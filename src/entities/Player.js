@@ -32,6 +32,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.scene,
             0,
             0,
+            1,
             this.health
         );
 
@@ -95,15 +96,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         setTimeout(() => this.setVelocityY(-this.bounceVelocity), 0);
-        this.play("hurt", true)
+        this.play("hurt", true);
     }
 
-    takesHit() {
+    takesHit(enemy) {
         if(this.hasBeenHit) {
             return;
         }
         this.hasBeenHit = true;
         this.bounceOff();
+
+        this.health -= enemy.damage;
+        this.healthBar.decrease(this.health);
 
         this.scene.time.delayedCall(700, () => this.hasBeenHit = false );
     }
