@@ -6,7 +6,6 @@ export default anims => {
         repeat: -1
     })
 
-
     anims.create({
         key: "run",
         frames: anims.generateFrameNumbers("knight_run_animation", {start: 0, end: 7}),
@@ -18,6 +17,13 @@ export default anims => {
         key: "jump",
         frames: anims.generateFrameNumbers("knight_jump_animation", {start: 0, end: 6}),
         frameRate: 6,
+        repeat: 1
+    })
+
+    anims.create({
+        key: "hurt",
+        frames: anims.generateFrameNumbers("knight_hurt_animation", {start: 0, end: 6}),
+        frameRate: 8,
         repeat: 1
     })
 }

@@ -86,9 +86,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         setTimeout(() => this.setVelocityY(-this.bounceVelocity), 0);
+        this.play("hurt", true)
     }
 
-    takesHit(initiator) {
+    takesHit() {
         if(this.hasBeenHit) {
             return;
         }

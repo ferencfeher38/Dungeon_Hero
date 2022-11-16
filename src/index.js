@@ -10,7 +10,7 @@ const SHARED_CONFIG = {
   mapOffsetWidth: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
   width: WIDTH,
   height: HEIGHT,
-  zoomFactor: 1.1,
+  zoomFactor: 1.0,
   debug: true
 }
 

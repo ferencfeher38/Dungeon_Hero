@@ -120,13 +120,13 @@ class Play extends Phaser.Scene {
             .addCollider(colliders.player, this.playerCollision);
     }
 
-    setupFollowupCameraOn(player) {
+    setupFollowupCameraOn(player, ca) {
         const { height, width, mapOffsetWidth, zoomFactor} = this.config;
         this.physics.world.setBounds(0, 0, width + mapOffsetWidth, height);
         this.cameras.main
             .setZoom(zoomFactor)
             .startFollow(player)
-            .setBounds(0, 0, width + mapOffsetWidth, height);
+            .setBounds(0, 0, width + mapOffsetWidth, height)
     }
 
     getPlayerZones(playerZonesLayer) {
@@ -147,6 +147,15 @@ class Play extends Phaser.Scene {
             endOfLevelOverlap.active = false;
             console.log("Player has won!");
         });
+    }
+
+    update() {
+        this.setCameraSize(this.cameras.main);
+    }
+
+    setCameraSize(camera) {
+        const { height, width, mapOffsetWidth, zoomFactor} = this.config;
+        camera.setSize(window.innerWidth > width ? width : window.innerWidth, window.innerHeight > height ? height : window.innerHeight);
     }
 }
 
