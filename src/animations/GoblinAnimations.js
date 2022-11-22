@@ -1,4 +1,4 @@
-export default (anims) => {
+export default anims => {
     anims.create({
         key: "goblin-walk",
         frames: anims.generateFrameNumbers("goblin_animations", {start: 6, end: 11}),

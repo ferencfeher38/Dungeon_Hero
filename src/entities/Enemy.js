@@ -24,6 +24,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.maxPatrolDistance = 400;
         this.currentPatrolDistance = 0;
         this.damage = 10;
+        this.health = 50;
         this.platformsCollidersLayer = null;
         this.rayGraphics = this.scene.add.graphics({lineStyle: {
             width: 2,
@@ -74,6 +75,15 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     setPlatformColliders(platformsCollidersLayer) {
         this.platformsCollidersLayer = platformsCollidersLayer;
+    }
+
+    takesHit(source) {
+        source.deliversHit(this);
+        this.health -= source.damage;
+
+        if(this.health <= 0) {
+
+        }
     }
 }
 

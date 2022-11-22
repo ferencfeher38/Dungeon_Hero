@@ -26,4 +26,11 @@ export default anims => {
         frameRate: 8,
         repeat: 1
     })
+
+    anims.create({
+        key: "throw",
+        frames: anims.generateFrameNumbers("knight_throw_animation", {start: 0, end: 3}),
+        frameRate: 8,
+        repeat: 0
+    })
 }

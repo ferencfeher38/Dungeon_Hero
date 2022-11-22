@@ -3,18 +3,21 @@ import InitializeAnimations from "../animations/PlayerAnimations";
 import HealthBar from "../hud/HealthBar";
 import Collidable from "../mixins/Collidable";
 import Projectiles from "../attacks/Projectiles";
+import Anims from "../mixins/Anims";
 
 class Player extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene, x, y) {
         super(scene, x, y, "knight_idle_animation",
                            "knight_run_animation",
-                           "knight_jump_animation");
+                           "knight_jump_animation",
+                           "knight_throw_animation");
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
         
         Object.assign(this, Collidable);
+        Object.assign(this, Anims);
         
         this.initialize();
         this.initializeEvents();
@@ -28,8 +31,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.hasBeenHit = false;
         this.bounceVelocity = 200;
         this.health = 100;
-
-        this.projectiles = new Projectiles(this.scene);
 
         this.healthBar = new HealthBar(
             this.scene,
@@ -47,9 +48,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setOffset(26, 55);
         InitializeAnimations(this.scene.anims);
 
-        this.scene.input.keyboard.on("keydown-Q", () => {
-            this.projectiles.fireProjectile();
-        })
+        this.lastDirection =  Phaser.Physics.Arcade.FACING_RIGHT;
+        this.projectiles = new Projectiles(this.scene);
+
+        this.scene.input.keyboard.on('keydown-Q', () => {
+            this.play("throw", true);
+            this.projectiles.fireProjectile(this);
+        });
     }
 
     initializeEvents() {
@@ -66,9 +71,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         const onFloor = this.body.onFloor();
 
         if(left.isDown) {
+            this.lastDirection =  Phaser.Physics.Arcade.FACING_LEFT;
             this.setVelocityX(-this.playerVelocity);
             this.setFlipX(true);
         } else if(right.isDown) {
+            this.lastDirection =  Phaser.Physics.Arcade.FACING_RIGHT;
             this.setVelocityX(this.playerVelocity);
             this.setFlipX(false);
         } else {
@@ -82,6 +89,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         if(onFloor) {
             this.jumpCount = 0;
+        }
+
+        if(this.isPlayingAnimation("throw")) {
+            return;
         }
 
         if(onFloor) {

@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Player from "../entities/Player";
 import Enemies from "../groups/Enemies";
+import InitializeAnimations from "../animations/HitAnimations";
 
 class Play extends Phaser.Scene {
 
@@ -32,6 +33,7 @@ class Play extends Phaser.Scene {
 
         this.setupFollowupCameraOn(player);
         this.createEndOfLevel(playerZones.end, player);
+        InitializeAnimations(this.anims);
     }
 
     finishDrawing(pointer, layer) {
@@ -114,10 +116,15 @@ class Play extends Phaser.Scene {
         player.takesHit(enemy);
     }
 
+    onHit(entity, source) {
+        entity.takesHit(source);
+    }
+
     createEnemyColliders(enemies, {colliders}) {
         enemies
             .addCollider(colliders.platformsColliders)
-            .addCollider(colliders.player, this.playerCollision);
+            .addCollider(colliders.player, this.playerCollision)
+            .addCollider(colliders.player.projectiles, this.onHit);
     }
 
     setupFollowupCameraOn(player, ca) {
