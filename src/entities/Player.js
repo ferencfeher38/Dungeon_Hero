@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import InitializeAnimations from "../animations/PlayerAnimations";
 import HealthBar from "../hud/HealthBar";
 import Collidable from "../mixins/Collidable";
+import Projectiles from "../attacks/Projectiles";
 
 class Player extends Phaser.Physics.Arcade.Sprite {
 
@@ -28,6 +29,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.bounceVelocity = 200;
         this.health = 100;
 
+        this.projectiles = new Projectiles(this.scene);
+
         this.healthBar = new HealthBar(
             this.scene,
             0,
@@ -43,6 +46,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setBodySize(40, 55);
         this.setOffset(26, 55);
         InitializeAnimations(this.scene.anims);
+
+        this.scene.input.keyboard.on("keydown-Q", () => {
+            this.projectiles.fireProjectile();
+        })
     }
 
     initializeEvents() {
