@@ -1,9 +1,6 @@
 import Phaser from 'phaser';
 import InitializeAnimations from "../animations/AttackAnimations";
 import EffectManager from '../effects/EffectManager';
-import SpriteEffect from "../effects/SpriteEffects";
-
-
 
 class Projectile extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y) {

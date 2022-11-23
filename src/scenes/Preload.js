@@ -36,7 +36,7 @@ class Preload extends Phaser.Scene {
             spacing: 35
         })
 
-        this.load.spritesheet("knight_throw_animation", "assets/knight/knight_projectile_attack_animation.png", {
+        this.load.spritesheet("knight_throw_animation", "assets/knight/knight_throw_animation.png", {
             frameWidth: 93,
             frameHeight: 110,
             spacing: 35
