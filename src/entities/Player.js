@@ -5,6 +5,7 @@ import Collidable from "../mixins/Collidable";
 import Projectiles from "../attacks/Projectiles";
 import Anims from "../mixins/Anims";
 import MeleeWeaponCollider from "../attacks/MeleeWeaponCollider";
+import { getTimestamp } from "../utilities/HelperFunctions";
 
 class Player extends Phaser.Physics.Arcade.Sprite {
 
@@ -53,15 +54,20 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.lastDirection =  Phaser.Physics.Arcade.FACING_RIGHT;
         this.projectiles = new Projectiles(this.scene);
         this.meleeWeaponCollider = new MeleeWeaponCollider(this.scene, 0, 0, "collider");
-
+        this.timeFromLastAttack = null;
         this.scene.input.keyboard.on('keydown-Q', () => {
             this.play("throw", true);
             this.projectiles.fireProjectile(this);
         });
 
         this.scene.input.keyboard.on('keydown-E', () => {
+            if(this.timeFromLastAttack && this.timeFromLastAttack + this.meleeWeaponCollider.speed > getTimestamp()) {
+                return;
+            }
+
             this.play("sword", true);
             this.meleeWeaponCollider.attack(this);
+            this.timeFromLastAttack = getTimestamp();
         });
 
         this.setDepth(10);
