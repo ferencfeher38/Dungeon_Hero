@@ -92,6 +92,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         if(this.isPlayingAnimation("throw")) {
+            this.throwBounceOff();
             return;
         }
 
@@ -103,6 +104,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             }
         } else {
             this.play("jump", true);
+        }
+    }
+
+    throwBounceOff() {
+        if(this.lastDirection === Phaser.Physics.Arcade.FACING_RIGHT) {
+            this.setVelocityX(-60);
+        } else {
+            this.setVelocityX(60);
         }
     }
 
