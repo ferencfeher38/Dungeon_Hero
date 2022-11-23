@@ -5,4 +5,18 @@ export default anims => {
         frameRate: 6,
         repeat: -1
     })
+
+    anims.create({
+        key: "goblin-hurt",
+        frames: anims.generateFrameNumbers("goblin_animations", {start: 18, end: 20}),
+        frameRate: 7,
+        repeat: 0
+    })
+
+    anims.create({
+        key: "goblin-death",
+        frames: anims.generateFrameNumbers("goblin_animations", {start: 24, end: 27}),
+        frameRate: 4,
+        repeat: 0
+    })
 }

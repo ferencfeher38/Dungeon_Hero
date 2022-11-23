@@ -11,7 +11,7 @@ const SHARED_CONFIG = {
   width: WIDTH,
   height: HEIGHT,
   zoomFactor: 1.0,
-  debug: false
+  debug: true
 }
 
 const Scenes = [PreloadScene, PlayScene];

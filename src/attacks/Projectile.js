@@ -42,8 +42,9 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
   deliversHit(target) {
     this.activateProjectile(false);
     this.traveledDistance = 0;
+    const impactPosition = { x: this.x , y: this.y };
     this.body.reset(0, 0);
-    this.effectManager.playEffectOn("fire-attack-hit", target);
+    this.effectManager.playEffectOn("fire-attack-hit", target, impactPosition);
   }
 
   activateProjectile(isActive) {

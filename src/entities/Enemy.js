@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Collidable from "../mixins/Collidable";
+import Anims from "../mixins/Anims";
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
 
@@ -10,6 +11,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         
         Object.assign(this, Collidable);
+        Object.assign(this, Anims);
 
         this.config = scene.config;
         
@@ -24,7 +26,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.maxPatrolDistance = 400;
         this.currentPatrolDistance = 0;
         this.damage = 10;
-        this.health = 50;
+        this.health = 20;
         this.platformsCollidersLayer = null;
         this.rayGraphics = this.scene.add.graphics({lineStyle: {
             width: 2,
@@ -43,7 +45,14 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
     }
 
-    update(time, delta) {
+    update(time) {
+        if(this.getBounds().bottom > 1080) {
+            this.scene.events.removeListener(Phaser.Scenes.Events.UPDATE, this.update, this);
+            this.setActive(false);
+            this.rayGraphics.clear();
+            this.destroy();
+            return;
+        }
         this.patrol(time);
     }
 
@@ -80,10 +89,6 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     takesHit(source) {
         source.deliversHit(this);
         this.health -= source.damage;
-
-        if(this.health <= 0) {
-
-        }
     }
 }
 
