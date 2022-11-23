@@ -29,8 +29,15 @@ export default anims => {
 
     anims.create({
         key: "throw",
-        frames: anims.generateFrameNumbers("knight_throw_animation", {start: 0, end: 3}),
+        frames: anims.generateFrameNumbers("knight_throw_attack_animation", {start: 0, end: 3}),
         frameRate: 8,
+        repeat: 0
+    })
+
+    anims.create({
+        key: "sword",
+        frames: anims.generateFrameNumbers("knight_sword_attack_animation", {start: 0, end: 3}),
+        frameRate: 6,
         repeat: 0
     })
 }

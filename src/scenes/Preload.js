@@ -42,9 +42,9 @@ class Preload extends Phaser.Scene {
             spacing: 35
         })
 
-        this.load.spritesheet("Knight_sword_attack_animation", "assets/knight/knight_sword_attack_animation.png", {
+        this.load.spritesheet("knight_sword_attack_animation", "assets/knight/knight_sword_attack_animation.png", {
             frameWidth: 128,
-            frameHeight: 128
+            frameHeight: 110,
         })
 
         this.load.spritesheet("fire_attack_animation", "assets/knight/fire_attack_animation.png", {
@@ -56,6 +56,11 @@ class Preload extends Phaser.Scene {
             frameWidth: 118,
             frameHeight: 118,
             spacing: 10
+        })
+
+        this.load.spritesheet("collider", "assets/maps/collider.png", {
+            frameWidth: 40,
+            frameHeight: 55
         })
 
         this.load.spritesheet("goblin_animations", "assets/enemies/goblin/goblin_animations.png", {
