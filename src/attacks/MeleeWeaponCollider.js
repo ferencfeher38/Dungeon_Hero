@@ -9,7 +9,7 @@ class MeleeWeaponCollider extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.damage = 15;
-        this.speed = 1000;
+        this.speed = 500;
         this.collider = collider;
         this.player = null;
 

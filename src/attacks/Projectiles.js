@@ -16,6 +16,7 @@ class Projectiles extends Phaser.Physics.Arcade.Group {
     })
 
     this.timeFromLastProjectile = null;
+    this.speed = 1000;
   }
 
   fireProjectile(initiator) {

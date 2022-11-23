@@ -8,6 +8,10 @@ class Goblin extends Enemy {
         InitializeAnimations(scene.anims);
     }
 
+    initialize() {
+        super.initialize();
+        this.health = 10;
+    }
     update(time, delta) {
         super.update(time,delta);
 
@@ -32,7 +36,7 @@ class Goblin extends Enemy {
             this.setVelocity(0, -200);
             this.body.checkCollision.none = true;
             this.setCollideWorldBounds(false);
-            setTimeout(() => this.setVisible(false), 1000);
+            setTimeout(() => this.setVisible(false), 2000);
         }
     }
 }

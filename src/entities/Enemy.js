@@ -26,7 +26,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.maxPatrolDistance = 400;
         this.currentPatrolDistance = 0;
         this.damage = 10;
-        this.health = 20;
+        this.health = 100;
+        this.raylength = 30;
         this.platformsCollidersLayer = null;
         this.rayGraphics = this.scene.add.graphics({lineStyle: {
             width: 2,
@@ -64,7 +65,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.currentPatrolDistance += Math.abs(this.body.deltaX());
 
         const { ray, hasHit } = this.raycast(this.body, this.platformsCollidersLayer, {
-            raylength: 30,
+            raylength: this.raylength,
             precision: 1,
             steepness: 0.5
         });

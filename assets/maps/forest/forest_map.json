@@ -155,6 +155,25 @@
                  "width":0,
                  "x":1733,
                  "y":696
+                }, 
+                {
+                 "class":"Goblin",
+                 "height":0,
+                 "id":15,
+                 "name":"Spawn",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"Type",
+                         "type":"string",
+                         "value":"Orc"
+                        }],
+                 "rotation":0,
+                 "type":"Orc",
+                 "visible":true,
+                 "width":0,
+                 "x":1112,
+                 "y":698.666666666667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -198,7 +217,7 @@
          "y":0
         }],
  "nextlayerid":7,
- "nextobjectid":15,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

@@ -67,6 +67,23 @@ class Preload extends Phaser.Scene {
             frameWidth: 128,
             frameHeight: 128
         })
+
+        this.load.spritesheet("orc_walk_animation", "assets/enemies/orc/orc_walk_animation.png", {
+            frameWidth: 170,
+            frameHeight: 200,
+            spacing: 86
+        })
+
+        this.load.spritesheet("orc_hurt_animation", "assets/enemies/orc/orc_hurt_animation.png", {
+            frameWidth: 170,
+            frameHeight: 200,
+            spacing: 86
+        })
+
+        this.load.spritesheet("orc_death_animation", "assets/enemies/orc/orc_death_animation.png", {
+            frameWidth: 256,
+            frameHeight: 200,
+        })
     }
 
     create() {
