@@ -20,6 +20,9 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     initialize() {
+        this.timeFromLastAttack = 0;
+        this.attackDelay = this.getAttackDelay();
+        this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
         this.gravity = 700;
         this.enemyVelocity = 50;
         this.timeFromLastTurn = 0;
@@ -90,6 +93,10 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     takesHit(source) {
         source.deliversHit(this);
         this.health -= source.damage;
+    }
+
+    getAttackDelay() {
+        return Phaser.Math.Between(1000, 5000);
     }
 }
 

@@ -4,9 +4,8 @@ import HealthBar from "../hud/HealthBar";
 import Collidable from "../mixins/Collidable";
 import Projectiles from "../attacks/Projectiles";
 import Anims from "../mixins/Anims";
-import MeleeWeaponCollider from "../attacks/MeleeWeaponCollider";
+import BaseMeleeWeaponCollider from "../attacks/BaseMeleeWeaponCollider";
 import { getTimestamp } from "../utilities/HelperFunctions";
-import Projectile from "../attacks/Projectile";
 
 class Player extends Phaser.Physics.Arcade.Sprite {
 
@@ -52,9 +51,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.setOffset(26, 55);
         InitializeAnimations(this.scene.anims);
 
-        this.lastDirection =  Phaser.Physics.Arcade.FACING_RIGHT;
+        this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
         this.projectiles = new Projectiles(this.scene);
-        this.meleeWeaponCollider = new MeleeWeaponCollider(this.scene, 0, 0, "collider");
+        this.meleeWeaponCollider = new BaseMeleeWeaponCollider(this.scene, 0, 0, "collider");
         this.timeFromLastAttack = null;
         this.scene.input.keyboard.on('keydown-Q', () => {
             if(this.timeFromLastAttack && this.timeFromLastAttack + this.projectiles.speed > getTimestamp()) {
@@ -158,15 +157,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.play("hurt", true);
     }
 
-    takesHit(enemy) {
+    takesHit(source) {
         if(this.hasBeenHit) {
             return;
         }
         this.hasBeenHit = true;
         this.bounceOff();
     
-        this.health -= enemy.damage;
+        this.health -= source.damage;
         this.healthBar.decrease(this.health);
+        source.deliversHit && source.deliversHit(this);
     
         this.scene.time.delayedCall(700, () => this.hasBeenHit = false);
     }

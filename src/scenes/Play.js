@@ -15,15 +15,18 @@ class Play extends Phaser.Scene {
         this.createBackground(map);
         const layers = this.createLayers(map);
         const playerZones = this.getPlayerZones(layers.playerZones);
-
         const player = this.createPlayer(playerZones.start);
+        const enemies = this.createEnemies(layers.enemySpawnpoints, layers.platformsColliders);
+
         this.createPlayerColliders(player, {
             colliders: {
-                platformsColliders: layers.platformsColliders
+                platformsColliders: layers.platformsColliders,
+                enemies
             }
         });
 
-        const enemies= this.createEnemies(layers.enemySpawnpoints, layers.platformsColliders);
+        console.log(enemies.weaponColliders)
+
         this.createEnemyColliders(enemies, {
             colliders: {
                 platformsColliders: layers.platformsColliders,
@@ -96,7 +99,8 @@ class Play extends Phaser.Scene {
 
     createPlayerColliders(player, {colliders}) {
         player
-            .addCollider(colliders.platformsColliders);
+            .addCollider(colliders.platformsColliders)
+            .addOverlap(colliders.enemies.weaponColliders, this.onHit);
     }
 
     createEnemies(spawnLayer, platformsColliders) {
@@ -157,7 +161,7 @@ class Play extends Phaser.Scene {
         });
     }
 
-    update() {
+    update(enemies) {
         this.setCameraSize(this.cameras.main);
     }
 

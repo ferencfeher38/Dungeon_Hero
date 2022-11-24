@@ -5,11 +5,4 @@ export default anims => {
         frameRate: 6,
         repeat: 0
     })
-
-    anims.create({
-        key: "fire-attack-hit",
-        frames: anims.generateFrameNumbers("fire_attack_animation", {start: 9, end: 13}),
-        frameRate: 6,
-        repeat: 0
-    })
 }
