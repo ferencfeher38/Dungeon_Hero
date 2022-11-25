@@ -63,6 +63,11 @@ class Preload extends Phaser.Scene {
             frameHeight: 55
         })
 
+        this.load.spritesheet("orc_attack_collider", "assets/maps/collider.png", {
+            frameWidth: 64,
+            frameHeight: 64
+        })
+
         this.load.spritesheet("goblin_animations", "assets/enemies/goblin/goblin_animations.png", {
             frameWidth: 128,
             frameHeight: 128
@@ -83,6 +88,12 @@ class Preload extends Phaser.Scene {
         this.load.spritesheet("orc_death_animation", "assets/enemies/orc/orc_death_animation.png", {
             frameWidth: 256,
             frameHeight: 200,
+        })
+
+        this.load.spritesheet("orc_attack_animation", "assets/enemies/orc/orc_attack_animation.png", {
+            frameWidth: 190,
+            frameHeight: 200,
+            spacing: 66
         })
     }
 

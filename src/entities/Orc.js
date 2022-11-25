@@ -1,11 +1,13 @@
 import Enemy from "./Enemy";
 import InitializeAnimations from "../animations/OrcAnimations";
+import WeaponColliders from "../attacks/WeaponColliders";
 
 class Orc extends Enemy {
     constructor(scene, x, y) {
         super(scene, x, y, "orc_walk_animation",
                            "orc_hurt_animation",
-                           "orc_death_animation");
+                           "orc_death_animation",
+                           "orc_attack_animation");
 
         InitializeAnimations(scene.anims);
     }
@@ -15,13 +17,23 @@ class Orc extends Enemy {
         this.enemyVelocity = 20;
         this.damage = 30;
         this.health = 10;
-        this.maxPatrolDistance = 200;
-        this.raylength = 60;
+        this.maxPatrolDistance = 300;
+        this.raylength = 55;
         this.setBodySize(75, 100);
+        this.weaponColliders = new WeaponColliders(this.scene, "orc_attack_collider", "orc");
+        this.attackDelay = this.getAttackDelay();
     }
 
     update(time, delta) {
         super.update(time,delta);
+
+
+        if(this.timeFromLastAttack + this.attackDelay <= time) {
+            this.play("orc-attack", true);
+            this.weaponColliders.attackCollider(this, "OrcWeaponCollider");
+            this.timeFromLastAttack = time;
+            this.attackDelay = this.getAttackDelay();
+        }
 
         if(!this.body) {
             return;
@@ -37,7 +49,7 @@ class Orc extends Enemy {
             return;
         }
 
-        if(this.isPlayingAnimation("orc-hurt") || this.isPlayingAnimation("orc-death")) {
+        if(this.isPlayingAnimation("orc-hurt") || this.isPlayingAnimation("orc-death") || this.isPlayingAnimation("orc-attack")) {
             return;
         }
 

@@ -3,11 +3,12 @@ import InitializeAnimations from "../animations/AttackAnimations";
 import EffectManager from '../effects/EffectManager';
 
 class GoblinWeaponCollider extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y) {
-        super(scene, x, y, "collider");
+    constructor(scene, x, y, key) {
+        super(scene, x, y, key);
     
         scene.add.existing(this);
         scene.physics.add.existing(this);
+
   
         InitializeAnimations(this.scene.anims);
 
@@ -20,7 +21,7 @@ class GoblinWeaponCollider extends Phaser.Physics.Arcade.Sprite {
       }
     
       attack(x, y) {
-        this.body.reset(x + 50, y - 67);
+        this.body.reset(x, y);
         this.activateCollider(true);
         setTimeout(() => this.activateCollider(false), 400);
         setTimeout(() => this.body.reset(0, 0), 400);

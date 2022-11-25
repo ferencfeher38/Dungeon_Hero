@@ -13,7 +13,8 @@ class Goblin extends Enemy {
         super.initialize();
         this.health = 10;
         this.attackDelay = this.getAttackDelay()
-        this.weaponColliders = new WeaponColliders(this.scene, 0, 0, "collider");
+        this.weaponColliders = new WeaponColliders(this.scene, "collider", "goblin");
+        this.enemyVelocity = 35;
     }
     
     update(time, delta) {
@@ -21,7 +22,7 @@ class Goblin extends Enemy {
 
         if(this.timeFromLastAttack + this.attackDelay <= time) {
             this.play("goblin-attack", true);
-            this.weaponColliders.attackCollider(this);
+            this.weaponColliders.attackCollider(this, "GoblinWeaponCollider");
             this.timeFromLastAttack = time;
             this.attackDelay = this.getAttackDelay();
         }

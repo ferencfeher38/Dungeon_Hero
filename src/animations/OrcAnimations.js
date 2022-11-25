@@ -19,4 +19,11 @@ export default anims => {
         frameRate: 4,
         repeat: 0
     })
+
+    anims.create({
+        key: "orc-attack",
+        frames: anims.generateFrameNumbers("orc_attack_animation", {start: 0, end: 3}),
+        frameRate: 5,
+        repeat: 0
+    })
 }
