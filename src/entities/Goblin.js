@@ -1,7 +1,6 @@
 import Enemy from "./Enemy";
 import InitializeAnimations from "../animations/GoblinAnimations";
-import GoblinWeaponCollider from "../attacks/GoblinWeaponCollider";
-import Projectiles from "../attacks/Projectiles";
+import WeaponColliders from "../attacks/WeaponColliders";
 
 class Goblin extends Enemy {
     constructor(scene, x, y) {
@@ -14,7 +13,7 @@ class Goblin extends Enemy {
         super.initialize();
         this.health = 10;
         this.attackDelay = this.getAttackDelay()
-        this.goblinWeaponCollider = new GoblinWeaponCollider(this.scene, 0, 0, "collider");
+        this.weaponColliders = new WeaponColliders(this.scene, 0, 0, "collider");
     }
     
     update(time, delta) {
@@ -22,7 +21,7 @@ class Goblin extends Enemy {
 
         if(this.timeFromLastAttack + this.attackDelay <= time) {
             this.play("goblin-attack", true);
-            this.goblinWeaponCollider.attack(this);
+            this.weaponColliders.attackCollider(this);
             this.timeFromLastAttack = time;
             this.attackDelay = this.getAttackDelay();
         }

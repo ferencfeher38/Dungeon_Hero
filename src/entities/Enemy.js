@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Collidable from "../mixins/Collidable";
 import Anims from "../mixins/Anims";
+import BaseMeleeWeaponCollider from "../attacks/BaseMeleeWeaponCollider";
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
 
@@ -43,6 +44,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.setOffset(35, 34);
         this.setImmovable(true);
         this.setVelocityX(this.enemyVelocity);
+        this.meleeWeaponCollider = new BaseMeleeWeaponCollider(this.scene, 0, 0, "collider");
     }
 
     initializeEvents() {

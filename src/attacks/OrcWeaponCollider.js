@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import InitializeAnimations from "../animations/AttackAnimations";
 import EffectManager from '../effects/EffectManager';
 
-class GoblinWeaponCollider extends Phaser.Physics.Arcade.Sprite {
+class OrcWeaponCollider extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, "collider");
     
@@ -38,4 +38,4 @@ class GoblinWeaponCollider extends Phaser.Physics.Arcade.Sprite {
       }
 }
 
-export default GoblinWeaponCollider
+export default OrcWeaponCollider

@@ -12,8 +12,8 @@ class Enemies extends Phaser.GameObjects.Group {
     getWeaponColliders() {
         const weaponColliders = new Phaser.GameObjects.Group();
         
-        this.getChildren().forEach(enemy => {
-            enemy.weaponColliders && weaponColliders.add(enemy.weaponColliders);
+        this.getChildren().forEach( enemy => {
+            enemy.weaponColliders && weaponColliders.addMultiple(enemy.weaponColliders.getChildren());
         });
 
         return weaponColliders;
