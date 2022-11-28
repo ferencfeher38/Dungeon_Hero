@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import { ModuleGraph } from "webpack";
 import Collectable from "../collectables/Collectable";
 
 class Collectables extends Phaser.Physics.Arcade.StaticGroup {
@@ -31,7 +30,7 @@ class Collectables extends Phaser.Physics.Arcade.StaticGroup {
 
         collectable.score = objectProperties.score || defaultScore;
     });
-}
+  }
 }
 
 export default Collectables;

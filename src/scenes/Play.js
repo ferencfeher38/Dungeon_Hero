@@ -13,6 +13,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        this.score = 0;
         const map = this.createMap();
         this.createBackground(map);
         InitializeAnimations(this.anims);
@@ -99,7 +100,7 @@ class Play extends Phaser.Scene {
         player
             .addCollider(colliders.platformsColliders)
             .addOverlap(colliders.weaponColliders, this.onHit)
-            .addOverlap(colliders.collectables, this.onCollect);
+            .addOverlap(colliders.collectables, this.onCollect, this);
     }
 
     createEnemies(spawnLayer, platformsColliders) {
@@ -124,6 +125,8 @@ class Play extends Phaser.Scene {
     }
 
     onCollect(entity, collectable) {
+        this.score += collectable.score;
+        console.log(this.score);
         collectable.disableBody(true, true);
     }
 

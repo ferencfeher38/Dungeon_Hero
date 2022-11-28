@@ -124,6 +124,12 @@
                  "height":32,
                  "id":16,
                  "name":"",
+                 "properties":[
+                        {
+                         "name":"score",
+                         "type":"int",
+                         "value":3
+                        }],
                  "rotation":0,
                  "visible":true,
                  "width":32,
