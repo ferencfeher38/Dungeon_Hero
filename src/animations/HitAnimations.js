@@ -5,4 +5,11 @@ export default anims => {
         frameRate: 6,
         repeat: 0
     })
+
+    anims.create({
+        key: "crystal",
+        frames: anims.generateFrameNumbers("crystal_animation", {start: 0, end: 9}),
+        frameRate: 6,
+        repeat: -1
+    })
 }

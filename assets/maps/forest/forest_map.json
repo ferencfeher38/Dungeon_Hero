@@ -115,6 +115,125 @@
         }, 
         {
          "draworder":"topdown",
+         "id":7,
+         "name":"collectables",
+         "objects":[
+                {
+                 "class":"",
+                 "gid":533,
+                 "height":32,
+                 "id":16,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":917.333333333333,
+                 "y":694.666666666667
+                }, 
+                {
+                 "class":"",
+                 "gid":533,
+                 "height":32,
+                 "id":18,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":964,
+                 "y":694.666666666667
+                }, 
+                {
+                 "class":"",
+                 "gid":533,
+                 "height":32,
+                 "id":19,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":1222.66666666667,
+                 "y":696
+                }, 
+                {
+                 "class":"",
+                 "gid":533,
+                 "height":32,
+                 "id":20,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":540,
+                 "y":670.666666666667
+                }, 
+                {
+                 "class":"",
+                 "gid":533,
+                 "height":32,
+                 "id":21,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":1916,
+                 "y":688
+                }, 
+                {
+                 "class":"",
+                 "gid":533,
+                 "height":32,
+                 "id":22,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":1966.66666666667,
+                 "y":686.666666666667
+                }, 
+                {
+                 "class":"",
+                 "gid":533,
+                 "height":32,
+                 "id":23,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":2653.33333333333,
+                 "y":685.333333333333
+                }, 
+                {
+                 "class":"",
+                 "gid":533,
+                 "height":32,
+                 "id":24,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":2717.33333333333,
+                 "y":681.333333333333
+                }, 
+                {
+                 "class":"",
+                 "gid":533,
+                 "height":32,
+                 "id":25,
+                 "name":"",
+                 "rotation":0,
+                 "visible":true,
+                 "width":32,
+                 "x":2781.33333333333,
+                 "y":681.333333333333
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":6,
          "name":"enemy_spawnpoints",
          "objects":[
@@ -131,7 +250,7 @@
                          "value":"Goblin"
                         }],
                  "rotation":0,
-                 "type":"Goblin",
+                 "type": "Goblin",
                  "visible":true,
                  "width":0,
                  "x":809,
@@ -150,14 +269,14 @@
                          "value":"Goblin"
                         }],
                  "rotation":0,
-                 "type":"Goblin",
+                 "type": "Goblin",
                  "visible":true,
                  "width":0,
                  "x":1733,
                  "y":696
                 }, 
                 {
-                 "class":"Goblin",
+                 "class":"Orc",
                  "height":0,
                  "id":15,
                  "name":"Spawn",
@@ -169,7 +288,7 @@
                          "value":"Orc"
                         }],
                  "rotation":0,
-                 "type":"Orc",
+                 "type": "Orc",
                  "visible":true,
                  "width":0,
                  "x":1112,
@@ -216,8 +335,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":16,
+ "nextlayerid":8,
+ "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -300,6 +419,29 @@
          "tilecount":480,
          "tileheight":64,
          "tilewidth":64
+        }, 
+        {
+         "columns":0,
+         "firstgid":533,
+         "grid":
+            {
+             "height":1,
+             "orientation":"orthogonal",
+             "width":1
+            },
+         "margin":0,
+         "name":"crystal",
+         "spacing":0,
+         "tilecount":1,
+         "tileheight":32,
+         "tiles":[
+                {
+                 "id":0,
+                 "image":"..\/..\/collectables\/crystal1.png",
+                 "imageheight":32,
+                 "imagewidth":32
+                }],
+         "tilewidth":32
         }],
  "tilewidth":64,
  "type":"map",

@@ -12,6 +12,11 @@ class Preload extends Phaser.Scene {
         this.load.image("tiles-2", "assets/maps/forest/forest_objects.png");
         this.load.image("tiles-3", "assets/maps/collider.png");
         this.load.image("forest-background", "assets/maps/forest/forest_background.jpg");
+        this.load.image("crystal", "assets/collectables/crystal1.png");
+        this.load.spritesheet("crystal_animation", "assets/collectables/crystal_animation.png", {
+            frameWidth: 32,
+            frameHeight: 32
+        })
         this.load.spritesheet("knight_idle_animation", "assets/knight/knight_idle_animation.png", {
             frameWidth: 93,
             frameHeight: 110,
