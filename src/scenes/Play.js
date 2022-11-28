@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import Player from "../entities/Player";
 import Enemies from "../groups/Enemies";
 import InitializeAnimations from "../animations/HitAnimations";
+import Collectables from "../groups/Collectables";
 
 
 class Play extends Phaser.Scene {
@@ -72,11 +73,9 @@ class Play extends Phaser.Scene {
     }
 
     createCollectables(collectableLayer) {
-        const collectables = this.physics.add.staticGroup();
+        const collectables = new Collectables(this);
 
-        collectableLayer.objects.forEach(collectableObject => {
-            collectables.get(collectableObject.x, collectableObject.y, "crystal");
-        });
+        collectables.addCollectablesFromLayer(collectableLayer);
 
         collectables.playAnimation("crystal");
 
