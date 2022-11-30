@@ -113,6 +113,13 @@ class Preload extends Phaser.Scene {
         this.load.once("complete", () => {
             this.startGame();
         });
+
+        this.load.audio("background-music", "assets/music/background_music.wav");
+        this.load.audio("projectile-attack-music", "assets/music/projectile_attack_music.wav");
+        this.load.audio("run-music", "assets/music/run_music.wav");
+        this.load.audio("jump-music", "assets/music/jump_music.wav");
+        this.load.audio("crystal-pickup-music", "assets/music/crystal_pickup_music.wav");
+        this.load.audio("sword-attack-music", "assets/music/sword_attack_music.wav");
     }
 
     startGame() {

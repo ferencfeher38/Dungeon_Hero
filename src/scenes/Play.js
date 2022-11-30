@@ -25,6 +25,7 @@ class Play extends Phaser.Scene {
         const player = this.createPlayer(playerZones.start);
         const enemies = this.createEnemies(layers.enemySpawnpoints, layers.platformsColliders);
         const collectables = this.createCollectables(layers.collectables);
+        this.pickupCrystalSound = this.sound.add("crystal-pickup-music", {volume: 0.05});
 
         this.createPlayerColliders(player, {
             colliders: {
@@ -42,6 +43,7 @@ class Play extends Phaser.Scene {
             }
         });
 
+        this.playBackgroundMusic();
         this.createBackButton();
         this.setupFollowupCameraOn(player);
         this.createEndOfMap(playerZones.end, player);
@@ -59,6 +61,7 @@ class Play extends Phaser.Scene {
         map.addTilesetImage("forest_objects", "tiles-2");
         map.addTilesetImage("collider", "tiles-3");
         map.addTilesetImage("traps", "tiles-4")
+
         return map;
     }
 
@@ -89,6 +92,14 @@ class Play extends Phaser.Scene {
                 enemySpawnpoints,
                 collectables,
                 traps};
+    }
+
+    playBackgroundMusic() {
+        if(this.sound.get("background-music")) {
+            return;
+        }
+
+       //this.sound.add("background-music", {loop: true, volume: 0.005}).play();
     }
 
     createCollectables(collectableLayer) {
@@ -162,6 +173,7 @@ class Play extends Phaser.Scene {
     onCollect(entity, collectable) {
         this.score += collectable.score;
         this.container.updateScore(this.score);
+        this.pickupCrystalSound.play();
         collectable.disableBody(true, true);
     }
 
@@ -219,7 +231,7 @@ class Play extends Phaser.Scene {
     }
 
     setCameraSize(camera) {
-        const { height, width, mapOffsetWidth, zoomFactor} = this.config;
+        const { height, width } = this.config;
         camera.setSize(window.innerWidth > width ? width : window.innerWidth, window.innerHeight > height ? height : window.innerHeight);
     }
 }

@@ -76,7 +76,23 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.timeFromLastAttack = getTimestamp();
         });
 
+        this.jumpSound = this.scene.sound.add("jump-music", {volume: 0.05});
+        this.projectileAttackSound = this.scene.sound.add("projectile-attack-music", {volume: 0.05});
+        this.runSound = this.scene.sound.add("run-music", {volume: 0.05});
+        this.swordAttackSound = this.scene.sound.add("sword-attack-music", {volume: 0.05});
+
         this.setDepth(10);
+
+        this.scene.time.addEvent({
+            delay: 400,
+            repeat: -1,
+            callbackScope: this,
+            callback: () => {
+                if(this.isPlayingAnimation("run")) {
+                    this.runSound.play();
+                }
+            }
+        })
     }
 
     initializeEvents() {
@@ -120,11 +136,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         if(this.isPlayingAnimation("throw")) {
+            this.projectileAttackSound.play();
             this.throwBounceOff();
             return;
         }
 
         if(this.isPlayingAnimation("sword")) {
+            this.swordAttackSound.play();
             if(this.lastDirection === Phaser.Physics.Arcade.FACING_LEFT) {
                 this.setOffset(60, 55);
             }
@@ -138,6 +156,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 this.play("idle", true);
             }
         } else {
+            this.jumpSound.play();
             this.play("jump", true);
         }
 
