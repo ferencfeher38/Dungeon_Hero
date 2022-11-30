@@ -202,7 +202,14 @@ class Play extends Phaser.Scene {
 
         const endOfLevelOverlap = this.physics.add.overlap(player, endOfLevel, () => {
             endOfLevelOverlap.active = false;
+
+            if(this.registry.get("map") === this.config.lastMap) {
+                this.scene.start("GameOverScene");
+                return;
+            }
+
             this.registry.inc("map", 1);
+            this.registry.inc("unlocked-maps", 1);
             this.scene.restart({gameStatus: "MAP_COMPLETED"});
         });
     }

@@ -3,6 +3,7 @@ import PlayScene from "./scenes/Play";
 import PreloadScene from "./scenes/Preload"
 import MenuScene from "./scenes/Menu";
 import MapScene from "./scenes/Maps";
+import GameOverScene from "./scenes/GameOver";
 
 const MAP_WIDTH = 25600;
 const WIDTH = document.body.offsetWidth;
@@ -15,9 +16,10 @@ const SHARED_CONFIG = {
   height: HEIGHT,
   zoomFactor: ZOOM_FACTOR,
   debug: true,
+  lastMap: 2
 }
 
-const Scenes = [PreloadScene, MenuScene, MapScene, PlayScene];
+const Scenes = [PreloadScene, MenuScene, MapScene, PlayScene, GameOverScene];
 const createScene = Scene => new Scene(SHARED_CONFIG)
 const initScenes = () => Scenes.map(createScene)
 
