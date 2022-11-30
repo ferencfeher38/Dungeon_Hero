@@ -16,7 +16,9 @@ class Preload extends Phaser.Scene {
         this.load.image("tiles-4", "assets/traps/trap1.png");
 
         this.load.image("forest-background", "assets/maps/forest/forest_background.jpg");
-        this.load.image("dungeon-background", "assets/maps/dungeon/dungeon_background.png");
+
+        this.load.image("menu-background", "assets/gui/menu_background.png");
+        this.load.image("back-button", "assets/gui/back_button.png");
 
         this.load.image("crystal", "assets/collectables/crystal1.png");
         this.load.spritesheet("crystal_animation", "assets/collectables/crystal_animation.png", {
@@ -115,6 +117,7 @@ class Preload extends Phaser.Scene {
 
     startGame() {
         this.registry.set("map", 1);
+        this.registry.set("unlocked-maps", 1);
         this.scene.start("MenuScene");
     }
 }

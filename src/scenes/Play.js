@@ -42,6 +42,7 @@ class Play extends Phaser.Scene {
             }
         });
 
+        this.createBackButton();
         this.setupFollowupCameraOn(player);
         this.createEndOfMap(playerZones.end, player);
 
@@ -111,6 +112,18 @@ class Play extends Phaser.Scene {
             .setDepth(-10)
             .setOrigin(0, 1)
             .setScrollFactor(0, 1);
+    }
+
+    createBackButton() {
+        const backButton = this.add.image(10, 40, "back-button")
+            .setOrigin(0)
+            .setScrollFactor(0)
+            .setScale(0.8)
+            .setInteractive({draggable: false, cursor: "pointer"});
+
+        backButton.on("pointerup", () => {
+            this.scene.start("MenuScene");
+        });
     }
 
     createPlayer(start) {

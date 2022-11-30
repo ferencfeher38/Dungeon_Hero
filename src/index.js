@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import PlayScene from "./scenes/Play";
 import PreloadScene from "./scenes/Preload"
 import MenuScene from "./scenes/Menu";
+import MapScene from "./scenes/Maps";
 
 const MAP_WIDTH = 25600;
 const WIDTH = document.body.offsetWidth;
@@ -16,7 +17,7 @@ const SHARED_CONFIG = {
   debug: true,
 }
 
-const Scenes = [PreloadScene, MenuScene, PlayScene];
+const Scenes = [PreloadScene, MenuScene, MapScene, PlayScene];
 const createScene = Scene => new Scene(SHARED_CONFIG)
 const initScenes = () => Scenes.map(createScene)
 

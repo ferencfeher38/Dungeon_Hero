@@ -1,25 +1,29 @@
 import BaseScene from './Base';
 
-class MenuScene extends BaseScene {
+class MapScene extends BaseScene {
 
   constructor(config) {
-    super('MenuScene', config);
-
-    this.menu = [
-      {scene: 'PlayScene', text: 'Play'},
-      {scene: 'MapScene', text: 'Maps'},
-      {scene: null, text: 'Exit'},
-    ]
+    super('MapScene', {...config, canGoBack: true});
   }
 
   create() {
     super.create();
+
+    this.menu= [];
+    const maps = this.registry.get("unlocked-maps");
+
+    for(let i = 1; i <= maps; i++) {
+      this.menu.push({
+        scene: "PlayScene", text: `Map ${i}`, map: i
+      });
+    }
+
     this.createMenu(this.menu, this.setupMenuEvents.bind(this));
   }
 
   setupMenuEvents(menuItem) {
     const textGO = menuItem.textGO;
-    textGO.setInteractive({draggable: false, cursor: "pointer"});
+    textGO.setInteractive();
 
     textGO.on('pointerover', () => {
       textGO.setStyle({fill: '#ff0'});
@@ -30,7 +34,10 @@ class MenuScene extends BaseScene {
     })
 
     textGO.on('pointerup', () => {
-      menuItem.scene && this.scene.start(menuItem.scene);
+      if(menuItem.scene) {
+        this.registry.set("map", menuItem.map);
+        this.scene.start(menuItem.scene);
+      }
 
       if (menuItem.text === 'Exit') {
         this.game.destroy(true);
@@ -39,4 +46,4 @@ class MenuScene extends BaseScene {
   }
 }
 
-export default MenuScene;
+export default MapScene;

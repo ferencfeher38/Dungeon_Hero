@@ -11,16 +11,15 @@ class BaseScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.image(0, 0, "dungeon-background").setOrigin(0);
+    this.add.image(0, 0, "menu-background").setOrigin(0);
     if (this.config.canGoBack) {
-      const backButton = this.add.image(this.config.width - 10, this.config.height -10, 'back')
+      const backButton = this.add.image((this.config.width / 2) + 25, (this.config.height / 2) + 100, 'back-button')
         .setOrigin(1)
-        .setScale(2)
-        .setInteractive()
+        .setInteractive({draggable: false, cursor: "pointer"});
 
       backButton.on('pointerup', () => {
         this.scene.start('MenuScene');
-      })
+      });
     }
   }
 
