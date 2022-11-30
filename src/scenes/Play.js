@@ -62,6 +62,8 @@ class Play extends Phaser.Scene {
         map.addTilesetImage("collider", "tiles-3");
         map.addTilesetImage("traps", "tiles-4")
 
+        map.addTilesetImage("dungeon_tiles", "tiles-5")
+
         return map;
     }
 
@@ -71,7 +73,9 @@ class Play extends Phaser.Scene {
         const tileset3 = map.getTileset("collider");
         const tileset4 = map.getTileset("traps");
 
-        const platforms = map.createStaticLayer("platforms", tileset1);
+        const tileset5 = map.getTileset("dungeon_tiles");
+
+        const platforms = map.createStaticLayer("platforms", [tileset1, tileset5]);
         const environment = map.createStaticLayer("environment", tileset2).setDepth(-2);
         const platformsColliders = map.createStaticLayer("platforms_colliders", tileset3);
         const traps = map.createStaticLayer("traps", tileset4);
