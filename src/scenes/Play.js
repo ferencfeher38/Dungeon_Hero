@@ -30,7 +30,8 @@ class Play extends Phaser.Scene {
             colliders: {
                 platformsColliders: layers.platformsColliders,
                 weaponColliders: enemies.getWeaponColliders(),
-                collectables
+                collectables,
+                traps: layers.traps
             }
         });
 
@@ -50,6 +51,7 @@ class Play extends Phaser.Scene {
         map.addTilesetImage("forest_tiles", "tiles-1");
         map.addTilesetImage("forest_objects", "tiles-2");
         map.addTilesetImage("collider", "tiles-3");
+        map.addTilesetImage("traps", "tiles-4")
         return map;
     }
 
@@ -57,12 +59,19 @@ class Play extends Phaser.Scene {
         const tileset1 = map.getTileset("forest_tiles");
         const tileset2 = map.getTileset("forest_objects");
         const tileset3 = map.getTileset("collider");
+        const tileset4 = map.getTileset("traps");
+
         const platforms = map.createStaticLayer("platforms", tileset1);
         const environment = map.createStaticLayer("environment", tileset2).setDepth(-2);
         const platformsColliders = map.createStaticLayer("platforms_colliders", tileset3);
+        const traps = map.createStaticLayer("traps", tileset4);
+
         const playerZones = map.getObjectLayer("player_zones");
         const enemySpawnpoints = map.getObjectLayer("enemy_spawnpoints");
         const collectables = map.getObjectLayer("collectables");
+
+        traps.setCollisionByExclusion(-1);
+
         platformsColliders.setVisible(false);
         platformsColliders.setCollisionByProperty({collides: true});
 
@@ -71,7 +80,8 @@ class Play extends Phaser.Scene {
                 platformsColliders,
                 playerZones,
                 enemySpawnpoints,
-                collectables};
+                collectables,
+                traps};
     }
 
     createCollectables(collectableLayer) {
@@ -101,7 +111,8 @@ class Play extends Phaser.Scene {
         player
             .addCollider(colliders.platformsColliders)
             .addOverlap(colliders.weaponColliders, this.onHit)
-            .addOverlap(colliders.collectables, this.onCollect, this);
+            .addOverlap(colliders.collectables, this.onCollect, this)
+            .addCollider(colliders.traps, this.onHit);
     }
 
     createEnemies(spawnLayer, platformsColliders) {

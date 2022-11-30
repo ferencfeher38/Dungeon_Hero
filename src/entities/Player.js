@@ -146,11 +146,19 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    bounceOff() {
-        if(this.body.touching.right) {
-            this.setVelocityX(-this.bounceVelocity);
+    bounceOff(source) {
+        if(source.body) {
+            if(this.body.touching.right) {
+                this.setVelocityX(-this.bounceVelocity);
+            } else {
+                this.setVelocityX(this.bounceVelocity);
+            }
         } else {
-            this.setVelocityX(this.bounceVelocity);
+            if(this.body.blocked.right) {
+                this.setVelocityX(-this.bounceVelocity);
+            } else {
+                this.setVelocityX(this.bounceVelocity);
+            }
         }
 
         setTimeout(() => this.setVelocityY(-this.bounceVelocity), 0);
@@ -162,9 +170,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             return;
         }
         this.hasBeenHit = true;
-        this.bounceOff();
+        this.bounceOff(source);
     
-        this.health -= source.damage;
+        this.health -= source.damage || source.properties.damage || 0;
         this.healthBar.decrease(this.health);
         source.deliversHit && source.deliversHit(this);
     
