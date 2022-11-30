@@ -5,13 +5,14 @@ import PreloadScene from "./scenes/Preload"
 const MAP_WIDTH = 25600;
 const WIDTH = document.body.offsetWidth;
 const HEIGHT = 1080;
+const ZOOM_FACTOR = 1.0;
 
 const SHARED_CONFIG = {
   mapOffsetWidth: MAP_WIDTH > WIDTH ? MAP_WIDTH - WIDTH : 0,
   width: WIDTH,
   height: HEIGHT,
-  zoomFactor: 1.0,
-  debug: true
+  zoomFactor: ZOOM_FACTOR,
+  debug: true,
 }
 
 const Scenes = [PreloadScene, PlayScene];

@@ -3,6 +3,7 @@ import Player from "../entities/Player";
 import Enemies from "../groups/Enemies";
 import InitializeAnimations from "../animations/HitAnimations";
 import Collectables from "../groups/Collectables";
+import Container from "../hud/Container";
 
 
 class Play extends Phaser.Scene {
@@ -14,6 +15,8 @@ class Play extends Phaser.Scene {
 
     create() {
         this.score = 0;
+        this.container = new Container(this, 0, 0);
+
         const map = this.createMap();
         this.createBackground(map);
         InitializeAnimations(this.anims);
@@ -30,8 +33,6 @@ class Play extends Phaser.Scene {
                 collectables
             }
         });
-
-        console.log(enemies.getWeaponColliders());
 
         this.createEnemyColliders(enemies, {
             colliders: {
@@ -126,7 +127,7 @@ class Play extends Phaser.Scene {
 
     onCollect(entity, collectable) {
         this.score += collectable.score;
-        console.log(this.score);
+        this.container.updateScore(this.score);
         collectable.disableBody(true, true);
     }
 
@@ -138,7 +139,7 @@ class Play extends Phaser.Scene {
             .addOverlap(colliders.player.meleeWeaponCollider, this.onHit);
     }
 
-    setupFollowupCameraOn(player, ca) {
+    setupFollowupCameraOn(player) {
         const { height, width, mapOffsetWidth, zoomFactor} = this.config;
         this.physics.world.setBounds(0, 0, width + mapOffsetWidth, height);
         this.cameras.main
