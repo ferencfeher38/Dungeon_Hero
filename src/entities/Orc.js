@@ -27,6 +27,9 @@ class Orc extends Enemy {
     update(time, delta) {
         super.update(time,delta);
 
+        if(!this.active || !this.body) {
+            return;
+        }
 
         if(this.timeFromLastAttack + this.attackDelay <= time) {
             this.play("orc-attack", true);
@@ -35,18 +38,10 @@ class Orc extends Enemy {
             this.attackDelay = this.getAttackDelay();
         }
 
-        if(!this.body) {
-            return;
-        }
-
         if(this.body.facing === Phaser.Physics.Arcade.FACING_RIGHT) {
             this.setOffset(60, 93);
         } else {
             this.setOffset(40, 93);
-        }
-
-        if(!this.active) { 
-            return;
         }
 
         if(this.isPlayingAnimation("orc-hurt") || this.isPlayingAnimation("orc-death") || this.isPlayingAnimation("orc-attack")) {

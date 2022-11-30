@@ -7,17 +7,23 @@ class Preload extends Phaser.Scene {
     }
 
     preload() {
-        this.load.tilemapTiledJSON("map", "assets/maps/forest/forest_map.json");
+        this.load.tilemapTiledJSON("map_1", "assets/maps/forest/forest_map.json");
+        this.load.tilemapTiledJSON("map_2", "assets/maps/dungeon/dungeon_map.json");
+
         this.load.image("tiles-1", "assets/maps/forest/forest_tiles.png");
         this.load.image("tiles-2", "assets/maps/forest/forest_objects.png");
         this.load.image("tiles-3", "assets/maps/collider.png");
         this.load.image("tiles-4", "assets/traps/trap1.png");
+
         this.load.image("forest-background", "assets/maps/forest/forest_background.jpg");
+        this.load.image("dungeon-background", "assets/maps/dungeon/dungeon_background.png");
+
         this.load.image("crystal", "assets/collectables/crystal1.png");
         this.load.spritesheet("crystal_animation", "assets/collectables/crystal_animation.png", {
             frameWidth: 32,
             frameHeight: 32
         })
+
         this.load.spritesheet("knight_idle_animation", "assets/knight/knight_idle_animation.png", {
             frameWidth: 93,
             frameHeight: 110,
@@ -101,12 +107,16 @@ class Preload extends Phaser.Scene {
             frameHeight: 200,
             spacing: 66
         })
+
+        this.load.once("complete", () => {
+            this.startGame();
+        });
     }
 
-    create() {
-        this.scene.start("PlayScene");
+    startGame() {
+        this.registry.set("map", 1);
+        this.scene.start("MenuScene");
     }
-
 }
 
 export default Preload;

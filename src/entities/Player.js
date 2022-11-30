@@ -6,6 +6,7 @@ import Projectiles from "../attacks/Projectiles";
 import Anims from "../mixins/Anims";
 import BaseMeleeWeaponCollider from "../attacks/BaseMeleeWeaponCollider";
 import { getTimestamp } from "../utilities/HelperFunctions";
+import EventDispatcher from "../events/Dispatcher";
 
 class Player extends Phaser.Physics.Arcade.Sprite {
 
@@ -45,7 +46,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.keyboards = this.scene.input.keyboard.createCursorKeys();
         this.body.setGravityY(this.gravity);
-        this.setCollideWorldBounds(true);
+        this.setCollideWorldBounds(false);
         this.setOrigin(0.5, 1);
         this.setBodySize(40, 55);
         this.setOffset(26, 55);
@@ -83,9 +84,15 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        if(this.hasBeenHit) {
+        if(this.hasBeenHit || !this.body) {
             return;
         }
+
+        if(this.y > this.scene.config.height) {
+            EventDispatcher.emit("PLAYER_LOSE");
+            return;
+        }
+
         const { left, right, space, up } = this.keyboards;
         const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space);
         const isSpaceUpDown = Phaser.Input.Keyboard.JustDown(up);
@@ -169,10 +176,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if(this.hasBeenHit) {
             return;
         }
+
+        this.health -= source.damage || source.properties.damage || 0;
+
+        if(this.health <= 0) {
+            EventDispatcher.emit("PLAYER_LOSE")
+            return;
+        }
+
         this.hasBeenHit = true;
         this.bounceOff(source);
     
-        this.health -= source.damage || source.properties.damage || 0;
         this.healthBar.decrease(this.health);
         source.deliversHit && source.deliversHit(this);
     

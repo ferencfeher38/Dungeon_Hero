@@ -18,6 +18,10 @@ class GoblinWeaponCollider extends Phaser.Physics.Arcade.Sprite {
     
       preUpdate(time, delta) {
         super.preUpdate(time, delta);
+
+        if(!this.active) {
+          return;
+      }
       }
     
       attack(x, y) {

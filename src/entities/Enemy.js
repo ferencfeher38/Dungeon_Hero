@@ -53,6 +53,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     update(time) {
+
         if(this.getBounds().bottom > 1080) {
             this.scene.events.removeListener(Phaser.Scenes.Events.UPDATE, this.update, this);
             this.setActive(false);

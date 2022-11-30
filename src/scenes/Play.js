@@ -4,7 +4,7 @@ import Enemies from "../groups/Enemies";
 import InitializeAnimations from "../animations/HitAnimations";
 import Collectables from "../groups/Collectables";
 import Container from "../hud/Container";
-
+import EventDispatcher from "../events/Dispatcher";
 
 class Play extends Phaser.Scene {
 
@@ -13,7 +13,7 @@ class Play extends Phaser.Scene {
         this.config = config;
     }
 
-    create() {
+    create({gameStatus}) {
         this.score = 0;
         this.container = new Container(this, 0, 0);
 
@@ -43,11 +43,17 @@ class Play extends Phaser.Scene {
         });
 
         this.setupFollowupCameraOn(player);
-        this.createEndOfLevel(playerZones.end, player);
+        this.createEndOfMap(playerZones.end, player);
+
+        if(gameStatus == "PLAYER_LOSE") {
+            return;
+        }
+
+        this.createGameEvents();
     }
 
     createMap() {
-        const map = this.make.tilemap({key: "map"});
+        const map = this.make.tilemap({key: `map_${this.getCurrentLevel()}`});
         map.addTilesetImage("forest_tiles", "tiles-1");
         map.addTilesetImage("forest_objects", "tiles-2");
         map.addTilesetImage("collider", "tiles-3");
@@ -86,12 +92,16 @@ class Play extends Phaser.Scene {
 
     createCollectables(collectableLayer) {
         const collectables = new Collectables(this);
-
         collectables.addCollectablesFromLayer(collectableLayer);
-
         collectables.playAnimation("crystal");
 
         return collectables;
+    }
+
+    createGameEvents() {
+        EventDispatcher.on("PLAYER_LOSE", () => {
+            this.scene.restart({gameStatus: "PLAYER_LOSE"});
+        });
     }
 
     createBackground(map) {
@@ -167,7 +177,11 @@ class Play extends Phaser.Scene {
         }
     }
 
-    createEndOfLevel(end, player) {
+    getCurrentLevel() {
+        return this.registry.get("map") || 1;
+    }
+
+    createEndOfMap(end, player) {
         const endOfLevel = this.physics.add.sprite(end.x, end.y, "end")
             .setAlpha(0)
             .setSize(5, this.config.height)
@@ -175,7 +189,8 @@ class Play extends Phaser.Scene {
 
         const endOfLevelOverlap = this.physics.add.overlap(player, endOfLevel, () => {
             endOfLevelOverlap.active = false;
-            console.log("Player has won!");
+            this.registry.inc("map", 1);
+            this.scene.restart({gameStatus: "MAP_COMPLETED"});
         });
     }
 

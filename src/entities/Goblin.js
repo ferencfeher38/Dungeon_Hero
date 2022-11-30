@@ -20,15 +20,15 @@ class Goblin extends Enemy {
     update(time, delta) {
         super.update(time,delta);
 
+        if(!this.active) {
+            return;
+        }
+
         if(this.timeFromLastAttack + this.attackDelay <= time) {
             this.play("goblin-attack", true);
             this.weaponColliders.attackCollider(this, "GoblinWeaponCollider");
             this.timeFromLastAttack = time;
             this.attackDelay = this.getAttackDelay();
-        }
-
-        if(!this.active) { 
-            return;
         }
 
         if(this.isPlayingAnimation("goblin-hurt") || this.isPlayingAnimation("goblin-death") || this.isPlayingAnimation("goblin-attack")) {
