@@ -12,8 +12,7 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
       active: false,
       visible: false,
       key,
-      classType: GoblinWeaponCollider,
-      OrcWeaponCollider
+      classType: GoblinWeaponCollider, OrcWeaponCollider
     });
 
     this.initialize(type);
@@ -69,6 +68,7 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
       }
       
       orcCollider.attack(positionX, positionY);
+
     }
   }
 }

@@ -32,7 +32,8 @@ class Play extends Phaser.Scene {
                 platformsColliders: layers.platformsColliders,
                 weaponColliders: enemies.getWeaponColliders(),
                 collectables,
-                traps: layers.traps
+                traps: layers.traps,
+                projectiles: enemies.getProjectiles()
             }
         });
 
@@ -157,7 +158,8 @@ class Play extends Phaser.Scene {
             .addCollider(colliders.platformsColliders)
             .addOverlap(colliders.weaponColliders, this.onHit)
             .addOverlap(colliders.collectables, this.onCollect, this)
-            .addCollider(colliders.traps, this.onHit);
+            .addCollider(colliders.traps, this.onHit)
+            .addCollider(colliders.projectiles, this.onHit);
     }
 
     createEnemies(spawnLayer, platformsColliders) {

@@ -23,6 +23,13 @@ export default anims => {
     anims.create({
         key: "dragon-attack",
         frames: anims.generateFrameNumbers("dragon_attack_animation", {start: 0, end: 3}),
+        frameRate: 4,
+        repeat: 0
+    })
+
+    anims.create({
+        key: "dragon-fire",
+        frames: anims.generateFrameNumbers("dragon_fire_animation", {start: 0, end: 5}),
         frameRate: 5,
         repeat: 0
     })

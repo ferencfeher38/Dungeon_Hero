@@ -1,5 +1,6 @@
 import Enemy from "./Enemy";
 import InitializeAnimations from "../animations/DragonAnimations";
+import Projectiles from "../attacks/Projectiles";
 
 class Orc extends Enemy {
     constructor(scene, x, y) {
@@ -22,6 +23,8 @@ class Orc extends Enemy {
         this.setBodySize(150, 80);
         this.setOffset(0, 110);
         this.attackDelay = this.getAttackDelay();
+        this.projectiles = new Projectiles(this.scene);
+        this.lastDirection = null;
     }
 
     update(time, delta) {
@@ -31,7 +34,14 @@ class Orc extends Enemy {
             return;
         }
 
+        if(this.body.velocity.x > 0) {
+            this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
+        } else {
+            this.lastDirection = Phaser.Physics.Arcade.FACING_LEFT;
+        }
+
         if(this.timeFromLastAttack + this.attackDelay <= time) {
+            this.projectiles.fireProjectile(this);
             this.play("dragon-attack", true);
             this.timeFromLastAttack = time;
             this.attackDelay = this.getAttackDelay();

@@ -20,7 +20,7 @@ class Orc extends Enemy {
         this.maxPatrolDistance = 500;
         this.raylength = 55;
         this.setBodySize(75, 100);
-        this.weaponColliders = new WeaponColliders(this.scene, "orc_attack_collider", "orc");
+        this.weaponColliders = new WeaponColliders(this.scene, "full_attack_collider", "orc");
         this.attackDelay = this.getAttackDelay();
     }
 

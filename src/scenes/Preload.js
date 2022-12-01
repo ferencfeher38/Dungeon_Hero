@@ -82,7 +82,7 @@ class Preload extends Phaser.Scene {
             frameHeight: 55
         })
 
-        this.load.spritesheet("orc_attack_collider", "assets/maps/collider.png", {
+        this.load.spritesheet("full_attack_collider", "assets/maps/collider.png", {
             frameWidth: 64,
             frameHeight: 64
         })
@@ -138,6 +138,11 @@ class Preload extends Phaser.Scene {
             frameWidth: 195,
             frameHeight: 200,
             spacing: 61
+        })
+
+        this.load.spritesheet("dragon_fire_animation", "assets/enemies/bosses/dragon/dragon_fire_animation.png", {
+            frameWidth: 128,
+            frameHeight: 128
         })
 
         // PLAYER AUDIO
