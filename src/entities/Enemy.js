@@ -28,7 +28,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.gravity = 700;
         this.enemyVelocity = 50;
         this.timeFromLastTurn = 0;
-        this.maxPatrolDistance = 400;
+        this.maxPatrolDistance = 100;
         this.currentPatrolDistance = 0;
         this.damage = 10;
         this.health = 100;

@@ -16,8 +16,8 @@ class Orc extends Enemy {
         super.initialize();
         this.enemyVelocity = 20;
         this.damage = 30;
-        this.health = 10;
-        this.maxPatrolDistance = 300;
+        this.health = 100;
+        this.maxPatrolDistance = 500;
         this.raylength = 55;
         this.setBodySize(75, 100);
         this.weaponColliders = new WeaponColliders(this.scene, "orc_attack_collider", "orc");

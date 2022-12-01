@@ -14,7 +14,7 @@ class BaseMeleeWeaponCollider extends Phaser.Physics.Arcade.Sprite {
     }
 
     initalize() {
-        this.damage = 15;
+        this.damage = 20;
         this.speed = 500;
         this.entity = null;
 

@@ -62,6 +62,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             }
 
             this.play("throw", true)
+            this.projectileAttackSound.play();
             this.projectiles.fireProjectile(this);
             this.timeFromLastAttack = getTimestamp();
         });
@@ -72,6 +73,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             }
 
             this.play("sword", true);
+            this.swordAttackSound.play();
             this.meleeWeaponCollider.attack(this);
             this.timeFromLastAttack = getTimestamp();
         });
@@ -128,6 +130,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         if((isSpaceJustDown || isSpaceUpDown) && (onFloor || this.jumpCount < this.consecutiveJumps)) {
             this.setVelocityY(-this.playerVelocity * 3.4);
+            this.jumpSound.play();
             this.jumpCount++;
         }
 
@@ -136,13 +139,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         if(this.isPlayingAnimation("throw")) {
-            this.projectileAttackSound.play();
             this.throwBounceOff();
             return;
         }
 
         if(this.isPlayingAnimation("sword")) {
-            this.swordAttackSound.play();
             if(this.lastDirection === Phaser.Physics.Arcade.FACING_LEFT) {
                 this.setOffset(60, 55);
             }
@@ -156,7 +157,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 this.play("idle", true);
             }
         } else {
-            this.jumpSound.play();
             this.play("jump", true);
         }
 

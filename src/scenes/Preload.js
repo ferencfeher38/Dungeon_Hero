@@ -12,7 +12,7 @@ class Preload extends Phaser.Scene {
 
         this.load.image("tiles-1", "assets/maps/forest/forest_tiles.png");
         this.load.image("tiles-2", "assets/maps/forest/forest_objects.png");
-        this.load.image("tiles-3", "assets/maps/collider.png");
+        this.load.image("tiles-3", "assets/maps/colliders.png");
         this.load.image("tiles-4", "assets/traps/trap1.png");
 
         this.load.image("tiles-5", "assets/maps/dungeon/dungeon_tiles.png");
