@@ -56,7 +56,7 @@ class Play extends Phaser.Scene {
     }
 
     createMap() {
-        const map = this.make.tilemap({key: `map_${this.getCurrentLevel()}`});
+        const map = this.make.tilemap({key: `map_${this.getCurrentMap()}`});
         map.addTilesetImage("forest_tiles", "tiles-1");
         map.addTilesetImage("forest_objects", "tiles-2");
         map.addTilesetImage("collider", "tiles-3");
@@ -123,10 +123,17 @@ class Play extends Phaser.Scene {
     createBackground(map) {
         const { height, width } = this.config;
         const backgroundObject = map.getObjectLayer("background").objects[0];
-        this.add.tileSprite(backgroundObject.x, backgroundObject.y, width, height, "forest-background")
+        if(this.getCurrentMap() === 1) {
+            this.add.tileSprite(backgroundObject.x, backgroundObject.y, width, height, "forest-background")
             .setDepth(-10)
             .setOrigin(0, 1)
             .setScrollFactor(0, 1);
+        } else {
+            this.add.tileSprite(backgroundObject.x, backgroundObject.y, width, height, "dungeon-background")
+            .setDepth(-10)
+            .setOrigin(0, 1)
+            .setScrollFactor(0, 1);
+        }
     }
 
     createBackButton() {
@@ -206,7 +213,7 @@ class Play extends Phaser.Scene {
         }
     }
 
-    getCurrentLevel() {
+    getCurrentMap() {
         return this.registry.get("map") || 1;
     }
 
