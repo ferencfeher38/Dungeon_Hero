@@ -24,6 +24,7 @@ class Preload extends Phaser.Scene {
         this.load.image("menu-background", "assets/gui/menu_background.png");
         this.load.image("back-button", "assets/gui/back_button.png");
 
+    
         this.load.image("crystal", "assets/collectables/crystal1.png");
         this.load.spritesheet("crystal_animation", "assets/collectables/crystal_animation.png", {
             frameWidth: 32,
@@ -114,16 +115,42 @@ class Preload extends Phaser.Scene {
             spacing: 66
         })
 
-        this.load.once("complete", () => {
-            this.startGame();
-        });
+        // DRAGON ANIMATIONS
+        this.load.spritesheet("dragon_walk_animation", "assets/enemies/bosses/dragon/dragon_walk_animation.png", {
+            frameWidth: 210,
+            frameHeight: 200,
+            spacing:46
+        })
 
+        this.load.spritesheet("dragon_hurt_animation", "assets/enemies/bosses/dragon/dragon_hurt_animation.png", {
+            frameWidth: 210,
+            frameHeight: 200,
+            spacing:46
+        })
+
+        this.load.spritesheet("dragon_death_animation", "assets/enemies/bosses/dragon/dragon_death_animation.png", {
+            frameWidth: 210,
+            frameHeight: 200,
+            spacing:46
+        })
+
+        this.load.spritesheet("dragon_attack_animation", "assets/enemies/bosses/dragon/dragon_attack_animation.png", {
+            frameWidth: 195,
+            frameHeight: 200,
+            spacing: 61
+        })
+
+        // PLAYER AUDIO
         this.load.audio("background-music", "assets/music/background_music.wav");
         this.load.audio("projectile-attack-music", "assets/music/projectile_attack_music.wav");
         this.load.audio("run-music", "assets/music/run_music.wav");
         this.load.audio("jump-music", "assets/music/jump_music.wav");
         this.load.audio("crystal-pickup-music", "assets/music/crystal_pickup_music.wav");
         this.load.audio("sword-attack-music", "assets/music/sword_attack_music.wav");
+
+        this.load.once("complete", () => {
+            this.startGame();
+        });
     }
 
     startGame() {
