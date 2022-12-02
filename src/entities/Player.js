@@ -53,7 +53,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         InitializeAnimations(this.scene.anims);
 
         this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
-        this.projectiles = new Projectiles(this.scene);
+        this.projectiles = new Projectiles(this.scene, "fire-attack");
         this.meleeWeaponCollider = new BaseMeleeWeaponCollider(this.scene, 0, 0, "collider");
         this.timeFromLastAttack = null;
         this.scene.input.keyboard.on('keydown-Q', () => {
@@ -63,7 +63,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
             this.play("throw", true)
             this.projectileAttackSound.play();
-            this.projectiles.fireProjectile(this);
+            this.projectiles.fireProjectile(this, "fire-attack");
             this.timeFromLastAttack = getTimestamp();
         });
 

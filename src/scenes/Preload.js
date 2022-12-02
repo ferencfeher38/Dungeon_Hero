@@ -146,6 +146,87 @@ class Preload extends Phaser.Scene {
             frameHeight: 128
         })
 
+        // SKELETON ANIMATIONS
+        this.load.spritesheet("skeleton_walk_animation", "assets/enemies/skeleton/skeleton_walk_animation.png", {
+            frameWidth: 100,
+            frameHeight: 128,
+            spacing: 28
+        })
+
+        this.load.spritesheet("skeleton_attack_animation", "assets/enemies/skeleton/skeleton_attack_animation.png", {
+            frameWidth: 120,
+            frameHeight: 128,
+            spacing: 8
+        })
+
+        this.load.spritesheet("skeleton_hurt_animation", "assets/enemies/skeleton/skeleton_hurt_animation.png", {
+            frameWidth: 100,
+            frameHeight: 128,
+            spacing: 28
+        })
+
+        this.load.spritesheet("skeleton_death_animation", "assets/enemies/skeleton/skeleton_death_animation.png", {
+            frameWidth: 100,
+            frameHeight: 128,
+            spacing: 28
+        })
+
+        //GHOST ANIMATIONS
+        this.load.spritesheet("ghost_walk_animation", "assets/enemies/ghost/ghost_walk_animation.png", {
+            frameWidth: 100,
+            frameHeight: 128,
+            spacing: 28
+        })
+
+        this.load.spritesheet("ghost_attack_animation", "assets/enemies/ghost/ghost_attack_animation.png", {
+            frameWidth: 120,
+            frameHeight: 128,
+            spacing: 8
+        })
+
+        this.load.spritesheet("ghost_hurt_animation", "assets/enemies/ghost/ghost_hurt_animation.png", {
+            frameWidth: 100,
+            frameHeight: 128,
+            spacing: 28
+        })
+
+        this.load.spritesheet("ghost_death_animation", "assets/enemies/ghost/ghost_death_animation.png", {
+            frameWidth: 100,
+            frameHeight: 128,
+            spacing: 28
+        })
+
+        this.load.spritesheet("ghost_projectile_attack_animation", "assets/enemies/ghost/ghost_projectile_attack_animation.png", {
+            frameWidth: 128,
+            frameHeight: 128,
+        })
+
+        // SKELETON DRAGON ANIMATIONS
+        this.load.spritesheet("skeleton_dragon_walk_animation", "assets/enemies/bosses/skeleton_dragon/skeleton_dragon_walk_animation.png", {
+            frameWidth: 210,
+            frameHeight: 200,
+            spacing:46
+        })
+
+        this.load.spritesheet("skeleton_dragon_hurt_animation", "assets/enemies/bosses/skeleton_dragon/skeleton_dragon_hurt_animation.png", {
+            frameWidth: 210,
+            frameHeight: 200,
+            spacing:46
+        })
+
+        this.load.spritesheet("skeleton_dragon_death_animation", "assets/enemies/bosses/skeleton_dragon/skeleton_dragon_death_animation.png", {
+            frameWidth: 210,
+            frameHeight: 200,
+            spacing:46
+        })
+
+        this.load.spritesheet("skeleton_dragon_attack_animation", "assets/enemies/bosses/skeleton_dragon/skeleton_dragon_attack_animation.png", {
+            frameWidth: 230,
+            frameHeight: 200,
+            spacing: 26
+        })
+
+
         // PLAYER AUDIO
         this.load.audio("background-music", "assets/music/background_music.wav");
         this.load.audio("projectile-attack-music", "assets/music/projectile_attack_music.wav");
@@ -161,7 +242,7 @@ class Preload extends Phaser.Scene {
 
     startGame() {
         this.registry.set("map", 1);
-        this.registry.set("unlocked-maps", 1);
+        this.registry.set("unlocked-maps", 2);
         this.scene.start("MenuScene");
     }
 }

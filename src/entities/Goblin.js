@@ -12,6 +12,7 @@ class Goblin extends Enemy {
     initialize() {
         super.initialize();
         this.health = 50;
+        this.damage = 20;
         this.attackDelay = this.getAttackDelay()
         this.weaponColliders = new WeaponColliders(this.scene, "collider", "goblin");
         this.enemyVelocity = 35;

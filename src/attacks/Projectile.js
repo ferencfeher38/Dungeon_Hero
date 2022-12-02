@@ -10,7 +10,7 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
 
     this.speed = 300;
-    this.maxDistance = 1200;
+    this.maxDistance = 800;
     this.traveledDistance = 0;
     this.cooldown = 1000;
     this.damage = 10;
@@ -32,11 +32,14 @@ class Projectile extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  fire(x, y) {
+  fire(x, y, animation) {
     this.activateProjectile(true);
     this.body.reset(x, y);
     this.setVelocityX(this.speed);
-    this.play("fire-attack", true);
+
+    if(animation) {
+      this.play(animation, true);
+    }
   }
 
   deliversHit(target) {

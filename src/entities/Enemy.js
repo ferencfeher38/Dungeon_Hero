@@ -46,6 +46,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.setImmovable(true);
         this.setVelocityX(this.enemyVelocity);
         this.meleeWeaponCollider = new BaseMeleeWeaponCollider(this.scene, 0, 0, "collider");
+        this.lastDirection = null;
     }
 
     initializeEvents() {
@@ -53,6 +54,16 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     update(time) {
+
+        if(!this.active || !this.body) {
+            return;
+        }
+
+        if(this.body.velocity.x > 0) {
+            this.lastDirection = Phaser.Physics.Arcade.FACING_RIGHT;
+        } else {
+            this.lastDirection = Phaser.Physics.Arcade.FACING_LEFT;
+        }
 
         if(this.getBounds().bottom > 1080) {
             this.scene.events.removeListener(Phaser.Scenes.Events.UPDATE, this.update, this);

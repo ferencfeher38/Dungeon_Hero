@@ -16,14 +16,13 @@ class Orc extends Enemy {
         super.initialize();
         this.enemyVelocity = 20;
         this.damage = 40;
-        this.health = 10;
+        this.health = 150;
         this.maxPatrolDistance = 300;
-        this.raylength = 55;
-        this.attackDelay = this.getAttackDelay();
+        this.raylength = 55;;
         this.setBodySize(150, 80);
         this.setOffset(0, 110);
         this.attackDelay = this.getAttackDelay();
-        this.projectiles = new Projectiles(this.scene);
+        this.projectiles = new Projectiles(this.scene, "fire-attack");
         this.lastDirection = null;
     }
 
@@ -41,7 +40,7 @@ class Orc extends Enemy {
         }
 
         if(this.timeFromLastAttack + this.attackDelay <= time) {
-            this.projectiles.fireProjectile(this);
+            this.projectiles.fireProjectile(this, "fire-attack");
             this.play("dragon-attack", true);
             this.timeFromLastAttack = time;
             this.attackDelay = this.getAttackDelay();

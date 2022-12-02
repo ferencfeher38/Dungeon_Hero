@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import GoblinWeaponCollider from "./GoblinWeaponCollider";
 import OrcWeaponCollider from "./OrcWeaponCollider";
+import SkeletonWeaponCollider from "./SkeletonWeaponCollider";
 
 class WeaponColliders extends Phaser.Physics.Arcade.Group {
   constructor(scene, key, type) {
@@ -12,7 +13,7 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
       active: false,
       visible: false,
       key,
-      classType: GoblinWeaponCollider, OrcWeaponCollider
+      classType: GoblinWeaponCollider, OrcWeaponCollider, SkeletonWeaponCollider
     });
 
     this.initialize(type);
@@ -25,6 +26,8 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
       this.scaleXY(0);
     } else if(type === "orc") {
       this.scaleXY(0, 0.5);
+    } else if(type == "skeleton") {
+      this.scaleXY(0, 0);
     }
   }
 
@@ -68,6 +71,25 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
       }
       
       orcCollider.attack(positionX, positionY);
+
+    } else if(classType === "SkeletonWeaponCollider") {
+      const skeletonCollider = this.getFirstDead(false);
+      let positionX = 0;
+      let positionY = 0;
+  
+      if (!skeletonCollider) {
+        return;
+      }
+  
+      if (entity.body.facing === Phaser.Physics.Arcade.FACING_RIGHT) {
+        positionX = entity.x + 60;
+        positionY = entity.y - 57;
+      } else {
+        positionX = entity.x - 60;
+        positionY = entity.y - 57;
+      }
+      
+      skeletonCollider.attack(positionX, positionY);
 
     }
   }
