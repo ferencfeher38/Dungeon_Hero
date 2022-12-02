@@ -60,6 +60,7 @@ class Play extends Phaser.Scene {
         const map = this.make.tilemap({key: `map_${this.getCurrentMap()}`});
         map.addTilesetImage("forest_tiles", "tiles-1");
         map.addTilesetImage("forest_objects", "tiles-2");
+        map.addTilesetImage("dungeon_objects", "tiles-6");
         map.addTilesetImage("colliders", "tiles-3");
         map.addTilesetImage("traps", "tiles-4")
 
@@ -75,9 +76,10 @@ class Play extends Phaser.Scene {
         const tileset4 = map.getTileset("traps");
 
         const tileset5 = map.getTileset("dungeon_tiles");
+        const tileset6 = map.getTileset("dungeon_objects");
 
         const platforms = map.createStaticLayer("platforms", [tileset1, tileset5]);
-        const environment = map.createStaticLayer("environment", tileset2);
+        const environment = map.createStaticLayer("environment", [tileset2, tileset6]);
         const platformsColliders = map.createStaticLayer("platforms_colliders", tileset3);
         const traps = map.createStaticLayer("traps", tileset4);
 
