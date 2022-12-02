@@ -60,12 +60,12 @@ class Play extends Phaser.Scene {
         const map = this.make.tilemap({key: `map_${this.getCurrentMap()}`});
         map.addTilesetImage("forest_tiles", "tiles-1");
         map.addTilesetImage("forest_objects", "tiles-2");
-        map.addTilesetImage("dungeon_objects", "tiles-6");
         map.addTilesetImage("colliders", "tiles-3");
         map.addTilesetImage("traps", "tiles-4")
 
         map.addTilesetImage("dungeon_tiles", "tiles-5")
-
+        map.addTilesetImage("dungeon_objects", "tiles-6");
+        
         return map;
     }
 
