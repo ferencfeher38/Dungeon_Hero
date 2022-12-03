@@ -2,7 +2,6 @@ import Phaser from "phaser";
 import Collidable from "../mixins/Collidable";
 import Anims from "../mixins/Anims";
 import BaseMeleeWeaponCollider from "../attacks/BaseMeleeWeaponCollider";
-import Container from "../hud/Container";
 
 class Enemy extends Phaser.Physics.Arcade.Sprite {
 
@@ -54,8 +53,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     update(time) {
-
-        if(!this.active || !this.body) {
+        if(!this.body) {
             return;
         }
 

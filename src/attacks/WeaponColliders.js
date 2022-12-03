@@ -31,17 +31,21 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
     }
   }
 
+  preUpdate(time, delta) {
+    super.preUpdate(time, delta);
+  }
+
 
   attackCollider(entity, classType) {
     if(classType === "GoblinWeaponCollider") {
       const goblinCollider = this.getFirstDead(false);
 
-      let positionX = 0;
-      let positionY = 0;
-  
       if (!goblinCollider) {
         return;
       }
+
+      let positionX = 0;
+      let positionY = 0;
   
       if (entity.body.facing === Phaser.Physics.Arcade.FACING_RIGHT) {
         positionX = entity.x + 50;
@@ -51,16 +55,18 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
         positionY = entity.y - 70;
       }
   
-      goblinCollider.attack(positionX, positionY);
+      goblinCollider.attack(positionX, positionY, 400);
       
     } else if(classType === "OrcWeaponCollider") {
       const orcCollider = this.getFirstDead(false);
-      let positionX = 0;
-      let positionY = 0;
-  
+
       if (!orcCollider) {
         return;
       }
+
+      let positionX = 0;
+      let positionY = 0;
+  
   
       if (entity.body.facing === Phaser.Physics.Arcade.FACING_RIGHT) {
         positionX = entity.x + 85;
@@ -70,16 +76,17 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
         positionY = entity.y - 57;
       }
       
-      orcCollider.attack(positionX, positionY);
+      orcCollider.attack(positionX, positionY, 400);
 
     } else if(classType === "SkeletonWeaponCollider") {
       const skeletonCollider = this.getFirstDead(false);
-      let positionX = 0;
-      let positionY = 0;
-  
+
       if (!skeletonCollider) {
         return;
       }
+
+      let positionX = 0;
+      let positionY = 0;
   
       if (entity.body.facing === Phaser.Physics.Arcade.FACING_RIGHT) {
         positionX = entity.x + 60;
@@ -89,8 +96,7 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
         positionY = entity.y - 57;
       }
       
-      skeletonCollider.attack(positionX, positionY);
-
+      skeletonCollider.attack(positionX, positionY, 400);
     }
   }
 }

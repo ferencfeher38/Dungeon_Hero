@@ -29,6 +29,7 @@ class SkeletonDragon extends Enemy {
     update(time, delta) {
         super.update(time,delta);
 
+
         if(!this.active || !this.body) {
             return;
         }

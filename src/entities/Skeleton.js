@@ -36,9 +36,9 @@ class Skeleton extends Enemy {
   update(time, delta) {
     super.update(time, delta);
 
-    if (!this.active || !this.body) {
+    if(!this.active || !this.body) {
       return;
-    }
+  }
 
     if (this.timeFromLastAttack + this.attackDelay <= time) {
       this.play("skeleton-attack", true);
