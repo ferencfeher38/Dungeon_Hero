@@ -164,12 +164,24 @@ class Play extends Phaser.Scene {
             .addCollider(colliders.projectiles, this.onHit);
     }
 
+    addCollectablesFromLayer(layer) {
+        const {score:  defaultScore, type} = this.getMapProperties(layer.properties);
+    
+        layer.objects.forEach(collectableObject => {
+            const collectable =  this.get(collectableObject.x, collectableObject.y, type);
+            const objectProperties = this.getMapProperties(collectableObject.properties);
+    
+            collectable.score = objectProperties.score || defaultScore;
+        });
+      }
+
     createEnemies(spawnLayer, platformsColliders) {
         const enemies = new Enemies(this);
         const enemyTypes = enemies.getTypes();
 
         spawnLayer.objects.forEach(spawnPoint => {
-            const enemy = new enemyTypes[spawnPoint.type](this, spawnPoint.x, spawnPoint.y);
+            const enemyType = spawnPoint.properties.find(prop => prop.name == "Type");
+            const enemy = new enemyTypes[enemyType.value](this, spawnPoint.x, spawnPoint.y);
             enemy.setPlatformColliders(platformsColliders);
             enemies.add(enemy);
         });

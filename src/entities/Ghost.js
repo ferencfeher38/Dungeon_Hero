@@ -23,7 +23,7 @@ class Ghost extends Enemy {
     this.enemyVelocity = 30;
     this.damage = 30;
     this.health = 100;
-    this.maxPatrolDistance = 500;
+    this.maxPatrolDistance = 200;
     this.raylength = 55;
     this.setBodySize(50, 75);
     this.attackDelay = this.getAttackDelay();
