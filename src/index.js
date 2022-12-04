@@ -4,6 +4,7 @@ import PreloadScene from "./scenes/Preload"
 import MenuScene from "./scenes/Menu";
 import MapScene from "./scenes/Maps";
 import GameOverScene from "./scenes/GameOver";
+import ScoreScene from "./scenes/Score";
 
 const MAP_WIDTH = 25600;
 const WIDTH = document.body.offsetWidth;
@@ -19,7 +20,7 @@ const SHARED_CONFIG = {
   lastMap: 2
 }
 
-const Scenes = [PreloadScene, MenuScene, MapScene, PlayScene, GameOverScene];
+const Scenes = [PreloadScene, MenuScene, MapScene, ScoreScene, PlayScene, GameOverScene];
 const createScene = Scene => new Scene(SHARED_CONFIG)
 const initScenes = () => Scenes.map(createScene)
 

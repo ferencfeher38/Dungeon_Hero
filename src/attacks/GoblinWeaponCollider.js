@@ -15,16 +15,13 @@ class GoblinWeaponCollider extends Phaser.Physics.Arcade.Sprite {
     this.damage = 10;
   }
 
-  preUpdate(time, delta) {
-    super.preUpdate(time, delta);
-  }
 
   attack(x, y, timeout) {
-      this.body.reset(x, y);
-      this.activateCollider(true);
-      setTimeout(() => this.activateCollider(false), timeout);
-      setTimeout(() => this.body.reset(0, 0), timeout);
-      setTimeout(() => (this.body.checkCollision.none = false), timeout);
+    this.body.reset(x, y);
+    this.activateCollider(true);
+    setTimeout(() => this.activateCollider(false), timeout);
+    setTimeout(() => this.body.reset(0, 0), timeout);
+    setTimeout(() => (this.body.checkCollision.none = false), timeout);
   }
 
   deliversHit(target) {
@@ -35,6 +32,11 @@ class GoblinWeaponCollider extends Phaser.Physics.Arcade.Sprite {
   activateCollider(isActive) {
     this.setActive(isActive);
     this.setVisible(isActive);
+  }
+
+
+  preUpdate(time, delta) {
+    super.preUpdate(time, delta);
   }
 }
 

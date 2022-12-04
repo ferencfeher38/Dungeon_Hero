@@ -8,6 +8,7 @@ class MenuScene extends BaseScene {
     this.menu = [
       {scene: 'PlayScene', text: 'Play'},
       {scene: 'MapScene', text: 'Maps'},
+      {scene: "ScoreScene", text: "Best Score"},
       {scene: null, text: 'Exit'},
     ]
   }

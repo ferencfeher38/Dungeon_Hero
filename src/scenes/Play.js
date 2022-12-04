@@ -11,11 +11,14 @@ class Play extends Phaser.Scene {
     constructor(config) {
         super("PlayScene");
         this.config = config;
+
+        this.crystal = 0;
+        this.score = 0;
     }
 
     create({gameStatus}) {
-        this.score = 0;
         this.container = new Container(this, 0, 0);
+        this.container.setDepth(10);
 
         const map = this.createMap();
         this.createBackground(map);
@@ -198,6 +201,8 @@ class Play extends Phaser.Scene {
     }
 
     onCollect(entity, collectable) {
+        this.crystal += collectable.score;
+        this.container.updateCrystal(this.crystal);
         this.score += collectable.score;
         this.container.updateScore(this.score);
         this.pickupCrystalSound.play();
@@ -218,7 +223,7 @@ class Play extends Phaser.Scene {
         this.cameras.main
             .setZoom(zoomFactor)
             .startFollow(player)
-            .setBounds(0, 0, width + mapOffsetWidth, height)
+            .setBounds(0, 0, width + mapOffsetWidth, height);
     }
 
     getPlayerZones(playerZonesLayer) {
@@ -243,6 +248,13 @@ class Play extends Phaser.Scene {
             endOfLevelOverlap.active = false;
 
             if(this.registry.get("map") === this.config.lastMap) {
+                const bestScoreText = localStorage.getItem("bestScore");
+                const bestScore = bestScoreText && parseInt(bestScoreText, 10);
+
+                if(!bestScore || this.score > bestScore) {
+                    localStorage.setItem("bestScore", this.score);
+                }
+
                 this.scene.start("GameOverScene");
                 return;
             }

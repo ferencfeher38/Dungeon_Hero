@@ -1036,24 +1036,6 @@
                  "y":944
                 }, 
                 {
-                 "class":"Ghost",
-                 "height":0,
-                 "id":216,
-                 "name":"Spawn",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"Type",
-                         "type":"string",
-                         "value":"Ghost"
-                        }],
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":23060,
-                 "y":946
-                }, 
-                {
                  "class":"Skeleton",
                  "height":0,
                  "id":217,
@@ -1124,24 +1106,6 @@
                  "width":0,
                  "x":24954,
                  "y":306
-                }, 
-                {
-                 "class":"Skeleton",
-                 "height":0,
-                 "id":221,
-                 "name":"Spawn",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"Type",
-                         "type":"string",
-                         "value":"Skeleton"
-                        }],
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":24050,
-                 "y":816
                 }, 
                 {
                  "class":"Skeleton",
@@ -1268,24 +1232,6 @@
                  "width":0,
                  "x":24212,
                  "y":814
-                }, 
-                {
-                 "class":"Ghost",
-                 "height":0,
-                 "id":229,
-                 "name":"Spawn",
-                 "point":true,
-                 "properties":[
-                        {
-                         "name":"Type",
-                         "type":"string",
-                         "value":"Ghost"
-                        }],
-                 "rotation":0,
-                 "visible":true,
-                 "width":0,
-                 "x":23608,
-                 "y":304
                 }, 
                 {
                  "class":"Ghost",

@@ -20,6 +20,7 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
   }
   
   initialize(type) {
+    this.timeout = 400;
     this.setAlpha(0.5);
 
     if(type === "goblin") {
@@ -29,10 +30,6 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
     } else if(type == "skeleton") {
       this.scaleXY(0, 0);
     }
-  }
-
-  preUpdate(time, delta) {
-    super.preUpdate(time, delta);
   }
 
 
@@ -55,7 +52,7 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
         positionY = entity.y - 70;
       }
   
-      goblinCollider.attack(positionX, positionY, 400);
+      goblinCollider.attack(positionX, positionY, this.timeout);
       
     } else if(classType === "OrcWeaponCollider") {
       const orcCollider = this.getFirstDead(false);
@@ -76,7 +73,7 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
         positionY = entity.y - 57;
       }
       
-      orcCollider.attack(positionX, positionY, 400);
+      orcCollider.attack(positionX, positionY, this.timeout);
 
     } else if(classType === "SkeletonWeaponCollider") {
       const skeletonCollider = this.getFirstDead(false);
@@ -96,7 +93,7 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
         positionY = entity.y - 57;
       }
       
-      skeletonCollider.attack(positionX, positionY, 400);
+      skeletonCollider.attack(positionX, positionY, this.timeout);
     }
   }
 }
