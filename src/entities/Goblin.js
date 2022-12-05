@@ -44,6 +44,7 @@ class Goblin extends Enemy {
         this.play("goblin-hurt", true);
 
         if(this.health <= 0) {
+            window.score += 5;
             this.play("goblin-death", true);
             this.setTint(0xff0000);
             this.setVelocity(0, -200);

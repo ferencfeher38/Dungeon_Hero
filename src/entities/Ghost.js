@@ -68,6 +68,7 @@ class Ghost extends Enemy {
     this.play("ghost-hurt", true);
 
     if (this.health <= 0) {
+      window.score += 15;
       this.play("ghost-death", true);
       this.setTint(0xff0000);
       this.setVelocity(0, -200);

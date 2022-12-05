@@ -6,14 +6,15 @@ import Collectables from "../groups/Collectables";
 import Container from "../hud/Container";
 import EventDispatcher from "../events/Dispatcher";
 
+
 class Play extends Phaser.Scene {
 
     constructor(config) {
         super("PlayScene");
         this.config = config;
 
+        window.score = 0
         this.crystal = 0;
-        this.score = 0;
     }
 
     create({gameStatus}) {
@@ -202,9 +203,7 @@ class Play extends Phaser.Scene {
 
     onCollect(entity, collectable) {
         this.crystal += collectable.score;
-        this.container.updateCrystal(this.crystal);
-        this.score += collectable.score;
-        this.container.updateScore(this.score);
+        score += collectable.score;
         this.pickupCrystalSound.play();
         collectable.disableBody(true, true);
     }
@@ -251,8 +250,8 @@ class Play extends Phaser.Scene {
                 const bestScoreText = localStorage.getItem("bestScore");
                 const bestScore = bestScoreText && parseInt(bestScoreText, 10);
 
-                if(!bestScore || this.score > bestScore) {
-                    localStorage.setItem("bestScore", this.score);
+                if(!bestScore || score > bestScore) {
+                    localStorage.setItem("bestScore", score);
                 }
 
                 this.scene.start("GameOverScene");
@@ -267,6 +266,8 @@ class Play extends Phaser.Scene {
 
     update(enemies) {
         this.setCameraSize(this.cameras.main);
+        this.container.updateCrystal(this.crystal);
+        this.container.updateScore(score);
     }
 
     setCameraSize(camera) {

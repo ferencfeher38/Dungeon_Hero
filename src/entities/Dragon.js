@@ -75,6 +75,7 @@ class Orc extends Enemy {
         this.play("dragon-hurt", true);
 
         if(this.health <= 0) {
+            window.score += 100;
             this.play("dragon-death", true);
             this.setTint(0xff0000);
             this.setVelocity(0, -200);

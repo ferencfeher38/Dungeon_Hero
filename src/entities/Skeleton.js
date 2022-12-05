@@ -69,6 +69,7 @@ class Skeleton extends Enemy {
     this.play("skeleton-hurt", true);
 
     if (this.health <= 0) {
+      window.score += 10;
       this.play("skeleton-death", true);
       this.setTint(0xff0000);
       this.setVelocity(0, -200);
