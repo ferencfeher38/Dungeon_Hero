@@ -24,6 +24,10 @@ class Preload extends Phaser.Scene {
 
         this.load.image("menu-background", "assets/gui/menu_background.png");
         this.load.image("back-button", "assets/gui/back_button.png");
+        this.load.image("beige-border", "assets/gui/beige_border.png");
+        this.load.image("tape", "assets/gui/tape.png");
+        this.load.image("knight-tape", "assets/gui/knight_tape.png");
+        this.load.image("button", "assets/gui/button.png");
 
     
         this.load.image("crystal", "assets/collectables/crystal1.png");

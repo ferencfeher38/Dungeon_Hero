@@ -1,9 +1,9 @@
-import BaseScene from './Base';
+import BaseScene from "./Base";
 
 class MapScene extends BaseScene {
 
   constructor(config) {
-    super('MapScene', {...config, canGoBack: true});
+    super("MapScene", {...config, canGoBack: true});
   }
 
   create() {
@@ -17,29 +17,32 @@ class MapScene extends BaseScene {
         scene: "PlayScene", text: `Map ${i}`, map: i
       });
     }
+    this.add.image(this.config.width / 2, this.config.height / 2, "beige-border")
+      .setDepth(-1)
+      .setScale(1.8);
 
     this.createMenu(this.menu, this.setupMenuEvents.bind(this));
   }
 
   setupMenuEvents(menuItem) {
     const textGO = menuItem.textGO;
-    textGO.setInteractive();
+    textGO.setInteractive({ draggable: false, cursor: "pointer" });
 
-    textGO.on('pointerover', () => {
-      textGO.setStyle({fill: '#ff0'});
+    textGO.on("pointerover", () => {
+      textGO.setStyle({fill: "#F3E9DD"});
     })
 
-    textGO.on('pointerout', () => {
-      textGO.setStyle({fill: '#fff'});
+    textGO.on("pointerout", () => {
+      textGO.setStyle({fill: "#ffffff"});
     })
 
-    textGO.on('pointerup', () => {
+    textGO.on("pointerup", () => {
       if(menuItem.scene) {
         this.registry.set("map", menuItem.map);
         this.scene.start(menuItem.scene);
       }
 
-      if (menuItem.text === 'Exit') {
+      if (menuItem.text === "Exit") {
         this.game.destroy(true);
       }
     })

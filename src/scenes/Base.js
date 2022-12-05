@@ -6,15 +6,15 @@ class BaseScene extends Phaser.Scene {
     super(key);
     this.config = config;
     this.screenCenter = [config.width / 2, (config.height / 2) - 100];
-    this.lineHeight = 80;
-    this.fontOptions = {font: "50px Arial", fill: '#fff'};
+    this.lineHeight = 110;
+    this.fontOptions = {font: "45px Arial", fill: "#ffffff"};
   }
 
   create() {
-    this.add.image(0, 0, "menu-background").setOrigin(0);
+    this.add.image(0, 0, "menu-background").setOrigin(0).setDepth(-2);
     if (this.config.canGoBack) {
-      const backButton = this.add.image((this.config.width / 2) + 25, (this.config.height / 2) + 100, 'back-button')
-        .setOrigin(1)
+      const backButton = this.add.image((this.config.width / 2), (this.config.height / 2) + 150, 'back-button')
+        .setOrigin(0.5)
         .setInteractive({draggable: false, cursor: "pointer"});
 
       backButton.on('pointerup', () => {
