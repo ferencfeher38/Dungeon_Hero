@@ -246,7 +246,7 @@ class Preload extends Phaser.Scene {
 
     startGame() {
         this.registry.set("map", 1);
-        this.registry.set("unlocked-maps", 2);
+        this.registry.set("unlocked-maps", 1);
         this.scene.start("MenuScene");
     }
 }

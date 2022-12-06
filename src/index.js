@@ -16,7 +16,7 @@ const SHARED_CONFIG = {
   width: WIDTH,
   height: HEIGHT,
   zoomFactor: ZOOM_FACTOR,
-  debug: true,
+  debug: false,
   lastMap: 2
 }
 
