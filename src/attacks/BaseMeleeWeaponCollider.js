@@ -19,7 +19,7 @@ class BaseMeleeWeaponCollider extends Phaser.Physics.Arcade.Sprite {
         this.entity = null;
 
         this.activateCollider(false);
-        this.setAlpha(0.5);
+        this.setAlpha(0);
         this.setVisible(false);
         this.setOrigin(0.5, 1);
         this.effectManager  = new EffectManager(this.scene);

@@ -21,7 +21,7 @@ class WeaponColliders extends Phaser.Physics.Arcade.Group {
   
   initialize(type) {
     this.timeout = 400;
-    this.setAlpha(0.5);
+    this.setAlpha(0);
 
     if(type === "goblin") {
       this.scaleXY(0);
